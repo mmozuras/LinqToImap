@@ -13,18 +13,14 @@ namespace LinqToGmail.Imap.Commands
             client = ImapSslClient.Current;
         }
 
-        protected Mailbox ParseMessages(Mailbox mailbox)
+        protected IEnumerable<MailboxMessage> ParseMessages()
         {
-            foreach (MailboxMessage message in from response in LoadMessages()
-                                               where response.HasInfo()
-                                               let mailboxMessage = MailboxMessage.Parse(response)
-                                               where !mailbox.Messages.Contains(mailboxMessage)
-                                               select mailboxMessage)
-            {
-                mailbox.Messages.Add(message);
-            }
-
-            return mailbox;
+            var mailboxMessages = from response in LoadMessages()
+                                  where response.HasInfo()
+                                  let mailboxMessage = MailboxMessage.Parse(response)
+                                  select mailboxMessage;
+            var messages = mailboxMessages.ToList();
+            return messages;
         }
 
         private IEnumerable<string> LoadMessages()

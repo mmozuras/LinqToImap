@@ -15,12 +15,7 @@ namespace LinqToGmail
         {
             get
             {
-                var @select = new Select();
-                var fetch = new Fetch();
-
-                var mailbox = @select.Execute("INBOX");
-
-                return fetch.Execute(mailbox, mailbox.MessagesCount - 50, mailbox.MessagesCount);
+                return new Select().Execute("INBOX");
             }
         }
 

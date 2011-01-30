@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Remotion.Data.Linq">
+      <HintPath>..\..\packages\Remotion.Relinq.1.13.92\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +46,8 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Query\GmailQueryable.cs" />
+    <Compile Include="Query\GmailQueryExecutor.cs" />
     <Compile Include="Gmail.cs" />
     <Compile Include="Imap\Addresses.cs" />
     <Compile Include="Imap\Commands\BaseCommand.cs" />
@@ -56,6 +61,7 @@
     <Compile Include="Imap\MailboxMessage.cs" />
     <Compile Include="Imap\MessageFlags.cs" />
     <Compile Include="Imap\StringExtensions.cs" />
+    <Compile Include="Query\GmailQueryModelVisitor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

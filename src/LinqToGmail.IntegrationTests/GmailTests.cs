@@ -1,9 +1,7 @@
 namespace LinqToGmail.IntegrationTests
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using Imap;
     using NUnit.Framework;
     using Should;
 
@@ -15,7 +13,7 @@ namespace LinqToGmail.IntegrationTests
         {
             using (Gmail gmail = Gmail.Login(GmailLogin.Username, GmailLogin.Password))
             {
-                IList<MailboxMessage> messages = gmail.Inbox.Messages;
+                var messages = gmail.Inbox.Messages.Take(50).ToList();
 
                 Console.WriteLine(string.Join(Environment.NewLine, messages));
                 messages.Count().ShouldBeInRange(1, 1000);

@@ -7,22 +7,22 @@ namespace LinqToGmail.Imap.Commands
     /// </summary>
     public class Fetch : BaseCommand
     {
-        public Mailbox Execute(Mailbox mailbox)
+        public IEnumerable<MailboxMessage> Execute(Mailbox mailbox)
         {
             Write("FETCH 1:* ALL");
-            return ParseMessages(mailbox);
+            return ParseMessages();
         }
 
-        public Mailbox Execute(Mailbox mailbox, int begin, int end)
+        public IEnumerable<MailboxMessage> Execute(Mailbox mailbox, int begin, int end)
         {
             Write("FETCH {0}:{1} ALL", begin, end);
-            return ParseMessages(mailbox);
+            return ParseMessages();
         }
 
-        public Mailbox Execute(Mailbox mailbox, IEnumerable<int> messages)
+        public IEnumerable<MailboxMessage> Execute(Mailbox mailbox, IEnumerable<int> messages)
         {
             Write("FETCH {0} ALL", string.Join(",", messages));
-            return ParseMessages(mailbox);
+            return ParseMessages();
         }
     }
 }

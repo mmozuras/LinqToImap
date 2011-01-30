@@ -1,14 +1,16 @@
 namespace LinqToGmail.Imap
 {
-    using System.Collections.Generic;
+    using Query;
 
     public class Mailbox
     {
         public Mailbox(string name)
         {
             Name = name;
-            Messages = new List<MailboxMessage>();
             Flags = new MessageFlags();
+
+            //TODO: This looks fishy
+            Messages = new GmailQueryable<MailboxMessage>(this);
         }
 
         public string Name { get; private set; }
@@ -18,7 +20,7 @@ namespace LinqToGmail.Imap
 
         public MessageFlags Flags { get; internal set; }
 
-        public IList<MailboxMessage> Messages { get; private set; }
+        public GmailQueryable<MailboxMessage> Messages { get; private set; }
 
         public bool ReadableAndWritable { get; internal set; }
     }
