@@ -13,19 +13,19 @@ namespace LinqToGmail.Imap.Commands
 
         public Mailbox Execute(Mailbox mailbox)
         {
-            Write(string.Format("FETCH 1:* ALL\r\n"));
+            Write("FETCH 1:* ALL");
             return ParseMessages(mailbox);
         }
 
         public Mailbox Execute(Mailbox mailbox, int begin, int end)
         {
-            Write(string.Format("FETCH {0}:{1} ALL\r\n", begin, end));
+            Write("FETCH {0}:{1} ALL", begin, end);
             return ParseMessages(mailbox);
         }
 
         public Mailbox Execute(Mailbox mailbox, IEnumerable<int> messages)
         {
-            Write(string.Format("FETCH {0} ALL\r\n", string.Join(",", messages)));
+            Write("FETCH {0} ALL", string.Join(",", messages));
             return ParseMessages(mailbox);
         }
     }

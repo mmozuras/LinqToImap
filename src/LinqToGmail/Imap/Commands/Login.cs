@@ -14,7 +14,7 @@ namespace LinqToGmail.Imap.Commands
         public void Execute(string username, string password)
         {
             //TODO: Gmail supports AUTH and XAUTH
-            Write("LOGIN " + username + " " + password + "\r\n");
+            Write("LOGIN {0} {1}", username, password);
             Read();
 
             string response = Read();

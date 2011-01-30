@@ -65,7 +65,12 @@ namespace LinqToGmail.Imap.Commands
 
         protected void Write(string message)
         {
-            client.Write(message);
+            client.Write(message + "\r\n");
+        }
+
+        protected void Write(string message, params object[] args)
+        {
+            Write(string.Format(message, args));
         }
 
         protected string Read()

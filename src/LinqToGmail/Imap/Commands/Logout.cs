@@ -11,7 +11,7 @@
 
         public void Execute()
         {
-            Write("LOGOUT\r\n");
+            Write("LOGOUT");
             Read();
         }
     }
