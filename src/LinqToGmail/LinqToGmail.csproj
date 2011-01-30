@@ -43,6 +43,19 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Gmail.cs" />
+    <Compile Include="Imap\Addresses.cs" />
+    <Compile Include="Imap\Commands\BaseCommand.cs" />
+    <Compile Include="Imap\Commands\Fetch.cs" />
+    <Compile Include="Imap\Commands\Login.cs" />
+    <Compile Include="Imap\Commands\Logout.cs" />
+    <Compile Include="Imap\Commands\Select.cs" />
+    <Compile Include="Imap\QuotedPrintableDecoder.cs" />
+    <Compile Include="Imap\ImapSslClient.cs" />
+    <Compile Include="Imap\Mailbox.cs" />
+    <Compile Include="Imap\MailboxMessage.cs" />
+    <Compile Include="Imap\MessageFlags.cs" />
+    <Compile Include="Imap\RegexExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

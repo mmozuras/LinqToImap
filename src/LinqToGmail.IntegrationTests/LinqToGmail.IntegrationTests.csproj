@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{839C8CDC-41FF-4986-B9BB-BCB0C668D746}</ProjectGuid>
+    <ProjectGuid>{783079C7-5C16-4B35-94C1-35424FF0EEF2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LinqToGmail.Tests</RootNamespace>
-    <AssemblyName>LinqToGmail.Tests</AssemblyName>
+    <RootNamespace>LinqToGmail.IntegrationTests</RootNamespace>
+    <AssemblyName>LinqToGmail.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -58,12 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Imap\AddressCollectionTests.cs" />
-    <Compile Include="Imap\MailboxMessageTests.cs" />
-    <Compile Include="Imap\MessageFlagsTests.cs" />
+    <Compile Include="GmailLogin.cs" />
+    <Compile Include="GmailTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -73,14 +70,6 @@
       <Project>{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}</Project>
       <Name>LinqToGmail</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Imap\mailboxMessage.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Imap\addressCollection.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

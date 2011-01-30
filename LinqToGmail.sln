@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToGmail", "src\LinqToGm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToGmail.Tests", "src\LinqToGmail.Tests\LinqToGmail.Tests.csproj", "{839C8CDC-41FF-4986-B9BB-BCB0C668D746}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToGmail.IntegrationTests", "src\LinqToGmail.IntegrationTests\LinqToGmail.IntegrationTests.csproj", "{783079C7-5C16-4B35-94C1-35424FF0EEF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{783079C7-5C16-4B35-94C1-35424FF0EEF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{783079C7-5C16-4B35-94C1-35424FF0EEF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{783079C7-5C16-4B35-94C1-35424FF0EEF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{783079C7-5C16-4B35-94C1-35424FF0EEF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
