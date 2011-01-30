@@ -23,7 +23,7 @@ namespace LinqToGmail.Imap
             streamReader = new StreamReader(sslStream, Encoding.ASCII);
 
             string response = Read();
-            if (!IsOk(response))
+            if (!response.IsOk())
             {
                 throw new ApplicationException(response);
             }
@@ -49,11 +49,6 @@ namespace LinqToGmail.Imap
         internal string Read()
         {
             return streamReader.ReadLine();
-        }
-
-        internal bool IsOk(string line)
-        {
-            return line.StartsWith("* OK") || line.Substring(7, 2) == "OK";
         }
     }
 }

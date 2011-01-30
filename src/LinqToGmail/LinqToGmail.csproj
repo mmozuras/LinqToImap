@@ -55,7 +55,7 @@
     <Compile Include="Imap\Mailbox.cs" />
     <Compile Include="Imap\MailboxMessage.cs" />
     <Compile Include="Imap\MessageFlags.cs" />
-    <Compile Include="Imap\RegexExtensions.cs" />
+    <Compile Include="Imap\StringExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

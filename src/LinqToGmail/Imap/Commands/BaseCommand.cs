@@ -6,7 +6,7 @@ namespace LinqToGmail.Imap.Commands
     
     public class BaseCommand
     {
-        public readonly ImapSslClient client;
+        private readonly ImapSslClient client;
 
         protected BaseCommand(ImapSslClient client)
         {
@@ -16,7 +16,7 @@ namespace LinqToGmail.Imap.Commands
         protected Mailbox ParseMessages(Mailbox mailbox)
         {
             foreach (MailboxMessage message in from response in LoadMessages()
-                                               where response.StartsWith("*")
+                                               where response.HasInfo()
                                                let mailboxMessage = MailboxMessage.Parse(response)
                                                where !mailbox.Messages.Contains(mailboxMessage)
                                                select mailboxMessage)
@@ -33,7 +33,7 @@ namespace LinqToGmail.Imap.Commands
             {
                 string response = client.Read();
                 yield return response;
-                if (client.IsOk(response))
+                if (response.IsOk())
                 {
                     break;
                 }
@@ -43,7 +43,7 @@ namespace LinqToGmail.Imap.Commands
         protected Mailbox ParseMailbox(string mailbox)
         {
             string response = client.Read();
-            if (response.StartsWith("*"))
+            if (response.HasInfo())
             {
                 var imapMailbox = new Mailbox(mailbox);
                 do
@@ -53,8 +53,8 @@ namespace LinqToGmail.Imap.Commands
                     response.RegexMatch(@" FLAGS \((.*?)\)", m => { imapMailbox.Flags = MessageFlags.Parse(m); });
 
                     response = client.Read();
-                } while (response.StartsWith("*"));
-                if (client.IsOk(response) && response.Contains("READ-WRITE"))
+                } while (response.HasInfo());
+                if (response.IsOk() && response.Contains("READ-WRITE"))
                 {
                     imapMailbox.ReadableAndWritable = true;
                 }

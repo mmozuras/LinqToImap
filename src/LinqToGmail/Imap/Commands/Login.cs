@@ -17,11 +17,10 @@ namespace LinqToGmail.Imap.Commands
             Write("LOGIN " + username + " " + password + "\r\n");
             Read();
 
-            string result = Read();
-            //TODO: client should be private
-            if (!client.IsOk(result))
+            string response = Read();
+            if (!response.IsOk())
             {
-                throw new AuthenticationException("Authentication failed: " + result);
+                throw new AuthenticationException("Authentication failed: " + response);
             }
         }
     }
