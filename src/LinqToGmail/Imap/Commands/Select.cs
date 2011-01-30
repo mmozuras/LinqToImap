@@ -11,7 +11,7 @@ namespace LinqToGmail.Imap.Commands
 
         public Mailbox Execute(string mailboxName)
         {
-            Client.Write("SELECT \"" + mailboxName + "\"\r\n");
+            Write("SELECT \"" + mailboxName + "\"\r\n");
             return ParseMailbox(mailboxName);
         }
     }

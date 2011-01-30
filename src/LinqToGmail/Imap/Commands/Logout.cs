@@ -11,8 +11,8 @@
 
         public void Execute()
         {
-            Client.Write("LOGOUT\r\n");
-            Client.Read();
+            Write("LOGOUT\r\n");
+            Read();
         }
     }
 }

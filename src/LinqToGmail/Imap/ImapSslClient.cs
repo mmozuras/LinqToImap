@@ -22,16 +22,11 @@ namespace LinqToGmail.Imap
             sslStream.AuthenticateAsClient(hostname);
             streamReader = new StreamReader(sslStream, Encoding.ASCII);
 
-            string read = Read();
-            if (!IsOk(read))
+            string response = Read();
+            if (!IsOk(response))
             {
-                throw new ApplicationException(read);
+                throw new ApplicationException(response);
             }
-        }
-
-        private string Tag
-        {
-            get { return "kw" + (tag++).ToString().PadLeft(4, '0') + " "; }
         }
 
         #region IDisposable Members
@@ -45,7 +40,8 @@ namespace LinqToGmail.Imap
 
         internal void Write(string message)
         {
-            message = Tag + message;
+            var tagNumber = (tag++).ToString("D4");
+            message = string.Format("kw{0} {1}", tagNumber, message);
             byte[] command = Encoding.ASCII.GetBytes(message.ToCharArray());
             sslStream.Write(command, 0, command.Length);
         }

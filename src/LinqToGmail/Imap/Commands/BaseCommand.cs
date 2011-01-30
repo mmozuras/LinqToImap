@@ -6,11 +6,11 @@ namespace LinqToGmail.Imap.Commands
     
     public class BaseCommand
     {
-        protected readonly ImapSslClient Client;
+        public readonly ImapSslClient client;
 
         protected BaseCommand(ImapSslClient client)
         {
-            Client = client;
+            this.client = client;
         }
 
         protected Mailbox ParseMessages(Mailbox mailbox)
@@ -31,9 +31,9 @@ namespace LinqToGmail.Imap.Commands
         {
             while (true)
             {
-                string response = Client.Read();
+                string response = client.Read();
                 yield return response;
-                if (Client.IsOk(response))
+                if (client.IsOk(response))
                 {
                     break;
                 }
@@ -42,7 +42,7 @@ namespace LinqToGmail.Imap.Commands
 
         protected Mailbox ParseMailbox(string mailbox)
         {
-            string response = Client.Read();
+            string response = client.Read();
             if (response.StartsWith("*"))
             {
                 var imapMailbox = new Mailbox(mailbox);
@@ -52,15 +52,25 @@ namespace LinqToGmail.Imap.Commands
                     response.RegexMatch(@"(\d+) RECENT", m => { imapMailbox.RecentMessagesCount = Convert.ToInt32(m); });
                     response.RegexMatch(@" FLAGS \((.*?)\)", m => { imapMailbox.Flags = MessageFlags.Parse(m); });
 
-                    response = Client.Read();
+                    response = client.Read();
                 } while (response.StartsWith("*"));
-                if (Client.IsOk(response) && response.Contains("READ-WRITE"))
+                if (client.IsOk(response) && response.Contains("READ-WRITE"))
                 {
                     imapMailbox.ReadableAndWritable = true;
                 }
                 return imapMailbox;
             }
             return null;
+        }
+
+        protected void Write(string message)
+        {
+            client.Write(message);
+        }
+
+        protected string Read()
+        {
+            return client.Read();
         }
     }
 }

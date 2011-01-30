@@ -14,11 +14,12 @@ namespace LinqToGmail.Imap.Commands
         public void Execute(string username, string password)
         {
             //TODO: Gmail supports AUTH and XAUTH
-            Client.Write("LOGIN " + username + " " + password + "\r\n");
-            Client.Read();
+            Write("LOGIN " + username + " " + password + "\r\n");
+            Read();
 
-            string result = Client.Read();
-            if (!Client.IsOk(result))
+            string result = Read();
+            //TODO: client should be private
+            if (!client.IsOk(result))
             {
                 throw new AuthenticationException("Authentication failed: " + result);
             }
