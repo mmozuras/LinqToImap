@@ -15,8 +15,8 @@ namespace LinqToGmail.Imap
 
         public string Subject { get; private set; }
 
-        public MessageFlags Flags { get; set; }
-        public Addresses Addresses { get; set; }
+        public MessageFlags Flags { get; private set; }
+        public Addresses Addresses { get; private set; }
 
         public DateTime Received { get; private set; }
         public DateTime Sent { get; private set; }

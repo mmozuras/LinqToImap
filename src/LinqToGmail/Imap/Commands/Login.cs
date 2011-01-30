@@ -7,10 +7,6 @@ namespace LinqToGmail.Imap.Commands
     /// </summary>
     public class Login : BaseCommand
     {
-        public Login(ImapSslClient client) : base(client)
-        {
-        }
-
         public void Execute(string username, string password)
         {
             //TODO: Gmail supports AUTH and XAUTH

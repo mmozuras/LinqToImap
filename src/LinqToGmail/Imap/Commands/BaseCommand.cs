@@ -8,9 +8,9 @@ namespace LinqToGmail.Imap.Commands
     {
         private readonly ImapSslClient client;
 
-        protected BaseCommand(ImapSslClient client)
+        protected BaseCommand()
         {
-            this.client = client;
+            client = ImapSslClient.Current;
         }
 
         protected Mailbox ParseMessages(Mailbox mailbox)

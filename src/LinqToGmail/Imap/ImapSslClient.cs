@@ -27,7 +27,11 @@ namespace LinqToGmail.Imap
             {
                 throw new ApplicationException(response);
             }
+
+            Current = this;
         }
+
+        public static ImapSslClient Current { get; private set; }
 
         #region IDisposable Members
 
@@ -40,7 +44,7 @@ namespace LinqToGmail.Imap
 
         internal void Write(string message)
         {
-            var tagNumber = (tag++).ToString("D4");
+            string tagNumber = (tag++).ToString("D4");
             message = string.Format("kw{0} {1}", tagNumber, message);
             byte[] command = Encoding.ASCII.GetBytes(message.ToCharArray());
             sslStream.Write(command, 0, command.Length);

@@ -5,13 +5,9 @@ namespace LinqToGmail.Imap.Commands
     /// </summary>
     public class Select : BaseCommand
     {
-        public Select(ImapSslClient client) : base(client)
-        {
-        }
-
         public Mailbox Execute(string mailboxName)
         {
-            Write("SELECT \"{0}\"", mailboxName);
+            Write("SELECT {0}", mailboxName);
             return ParseMailbox(mailboxName);
         }
     }

@@ -7,10 +7,6 @@ namespace LinqToGmail.Imap.Commands
     /// </summary>
     public class Fetch : BaseCommand
     {
-        public Fetch(ImapSslClient client) : base(client)
-        {
-        }
-
         public Mailbox Execute(Mailbox mailbox)
         {
             Write("FETCH 1:* ALL");

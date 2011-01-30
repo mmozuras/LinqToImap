@@ -15,8 +15,8 @@ namespace LinqToGmail
         {
             get
             {
-                var @select = new Select(client);
-                var fetch = new Fetch(client);
+                var @select = new Select();
+                var fetch = new Fetch();
 
                 var mailbox = @select.Execute("INBOX");
 
@@ -28,7 +28,7 @@ namespace LinqToGmail
 
         public void Dispose()
         {
-            new Logout(client).Execute();
+            new Logout().Execute();
             client.Dispose();
         }
 
@@ -38,7 +38,7 @@ namespace LinqToGmail
         {
             var connection = new ImapSslClient(host, port);
 
-            new Login(connection).Execute(username, password);
+            new Login().Execute(username, password);
             return new Gmail
                        {
                            client = connection,
