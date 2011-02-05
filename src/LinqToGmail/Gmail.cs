@@ -9,13 +9,14 @@ namespace LinqToGmail
         private const string host = "imap.gmail.com";
         private const int port = 993;
 
-        private ImapSslClient client;
+        private IImapSslClient client;
+        private ICommandExecutor commandExecutor;
 
         public Mailbox Inbox
         {
             get
             {
-                return client.Execute<Mailbox>(new Select("INBOX"));
+                return commandExecutor.Execute<Mailbox>(new Select("INBOX"));
             }
         }
 
@@ -23,7 +24,7 @@ namespace LinqToGmail
 
         public void Dispose()
         {
-            client.Execute(new Logout());
+            commandExecutor.Execute(new Logout());
             client.Dispose();
         }
 
@@ -31,12 +32,14 @@ namespace LinqToGmail
 
         public static Gmail Login(string username, string password)
         {
-            var connection = new ImapSslClient(host, port);
+            var imapSslClient = new ImapSslClient(host, port);
+            var executor = new CommandExecutor(imapSslClient);
+            executor.Execute(new Login(username, password));
 
-            connection.Execute(new Login(username, password));
             return new Gmail
                        {
-                           client = connection,
+                           client = imapSslClient,
+                           commandExecutor = executor
                        };
         }
     }

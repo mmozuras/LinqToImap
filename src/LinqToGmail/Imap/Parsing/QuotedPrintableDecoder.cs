@@ -1,4 +1,4 @@
-namespace LinqToGmail.Imap
+namespace LinqToGmail.Imap.Parsing
 {
     using System.Net.Mail;
 

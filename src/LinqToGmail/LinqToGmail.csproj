@@ -46,8 +46,11 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Imap\CommandExecutor.cs" />
     <Compile Include="Imap\Commands\BaseCommand.cs" />
     <Compile Include="Ensure.cs" />
+    <Compile Include="Imap\ICommandExecutor.cs" />
+    <Compile Include="Imap\IImapSslClient.cs" />
     <Compile Include="Imap\Parsing\AddressesParser.cs" />
     <Compile Include="Imap\Parsing\IParser.cs" />
     <Compile Include="Imap\Parsing\MailboxMessageParser.cs" />
@@ -64,7 +67,7 @@
     <Compile Include="Imap\Commands\Login.cs" />
     <Compile Include="Imap\Commands\Logout.cs" />
     <Compile Include="Imap\Commands\Select.cs" />
-    <Compile Include="Imap\QuotedPrintableDecoder.cs" />
+    <Compile Include="Imap\Parsing\QuotedPrintableDecoder.cs" />
     <Compile Include="Imap\ImapSslClient.cs" />
     <Compile Include="Imap\Mailbox.cs" />
     <Compile Include="Imap\MailboxMessage.cs" />

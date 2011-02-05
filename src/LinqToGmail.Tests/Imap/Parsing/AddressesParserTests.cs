@@ -23,6 +23,8 @@ namespace LinqToGmail.Tests.Imap.Parsing
             imapAddresses.From.ToString().ShouldEqual(johnDoe);
             imapAddresses.ReplyTo.ToString().ShouldEqual(johnDoe);
             imapAddresses.Sender.ToString().ShouldEqual(johnDoe);
+            imapAddresses.Cc.ShouldBeEmpty();
+            imapAddresses.Bcc.ShouldBeEmpty();
         }
     }
 }

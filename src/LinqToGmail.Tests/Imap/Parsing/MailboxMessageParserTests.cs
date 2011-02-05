@@ -25,8 +25,12 @@ namespace LinqToGmail.Tests.Imap.Parsing
             var mailboxMessage = parser.Parse(new[] {message});
 
             mailboxMessage.Id.ShouldEqual(20951);
+            mailboxMessage.Flags.Answered.ShouldEqual(false);
             mailboxMessage.Subject.ShouldEqual("Subject");
             mailboxMessage.Addresses.From.Address.ShouldEqual("John.Doe@mail.com");
+            mailboxMessage.Received.ShouldEqual(DateTime.Parse("2011.01.28 11:55:59"));
+            mailboxMessage.Sent.ShouldEqual(DateTime.Parse("2011.01.28 10:00:24"));
+            mailboxMessage.TimeZone.ShouldEqual("+0000");
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]

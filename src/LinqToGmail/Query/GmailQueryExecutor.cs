@@ -9,10 +9,14 @@
     internal class GmailQueryExecutor : IQueryExecutor
     {
         private readonly Mailbox mailbox;
+        private readonly ICommandExecutor commandExecutor;
 
         public GmailQueryExecutor(Mailbox mailbox)
         {
             this.mailbox = mailbox;
+
+            //TODO: Figure this out
+            commandExecutor = CommandExecutor.Current;
         }
 
         #region IQueryExecutor Members
@@ -42,7 +46,7 @@
             sqlVisitor.VisitQueryModel(queryModel);
 
             //TODO: Temporary cast, will probably be removed when I'll figure out re-linq.
-            return (IEnumerable<T>) sqlVisitor.Results;
+            return (IEnumerable<T>) sqlVisitor.Actions;
         }
 
         #endregion
