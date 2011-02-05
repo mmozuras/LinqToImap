@@ -1,10 +1,15 @@
 namespace LinqToGmail.Imap
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Net.Security;
     using System.Net.Sockets;
+    using System.Reflection;
     using System.Text;
+    using Commands;
+    using Parsing;
 
     public class ImapSslClient : IDisposable
     {
@@ -33,6 +38,42 @@ namespace LinqToGmail.Imap
 
         public static ImapSslClient Current { get; private set; }
 
+        public IEnumerable<string> Execute(ICommand command)
+        {
+            Write(command.Text + "\r\n");
+            var responses = ReadRespone().ToList();
+
+            if (!responses.Last().IsOk())
+            {
+                throw new ApplicationException(string.Join(Environment.NewLine, responses));
+            }
+            
+            return responses;
+        }
+
+        public T Execute<T>(ICommand command)
+        {
+            var responses = Execute(command);
+
+            var parserType = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(typeof (IParser<T>).IsAssignableFrom)
+                .Single();
+
+            var parser = (IParser<T>) Activator.CreateInstance(parserType);
+            return parser.Parse(responses);
+        }
+
+        private IEnumerable<string> ReadRespone()
+        {
+            string response;
+            do
+            {
+                response = Read();
+                yield return response;
+            } while (response.HasInfo() && !streamReader.EndOfStream);
+        }
+
         #region IDisposable Members
 
         public void Dispose()
@@ -42,7 +83,7 @@ namespace LinqToGmail.Imap
 
         #endregion
 
-        internal void Write(string message)
+        private void Write(string message)
         {
             string tagNumber = (tag++).ToString("D4");
             message = string.Format("kw{0} {1}", tagNumber, message);
@@ -50,8 +91,8 @@ namespace LinqToGmail.Imap
             sslStream.Write(command, 0, command.Length);
         }
 
-        internal string Read()
-        {
+        private string Read()
+        {            
             return streamReader.ReadLine();
         }
     }

@@ -1,20 +1,21 @@
-namespace LinqToGmail.Tests.Imap
+namespace LinqToGmail.Tests.Imap.Parsers
 {
     using System.IO;
     using System.Linq;
-    using LinqToGmail.Imap;
+    using LinqToGmail.Imap.Parsing;
     using NUnit.Framework;
     using Should;
 
     [TestFixture]
-    public class AddressCollectionTests
+    public class AddressesParserTests
     {
         [Test]
         public void Should_be_able_to_parse_from_string()
         {
             string imapAddress = File.ReadAllLines(".\\Imap\\addressCollection.txt")[0];
 
-            Addresses imapAddresses = Addresses.Parse(imapAddress);
+            var parser = new AddressesParser();
+            var imapAddresses = parser.Parse(new[] {imapAddress});
 
             imapAddresses.To.Single().ToString().ShouldEqual("\"jane.doe@mail.com\" <jane.doe@mail.com>");
 

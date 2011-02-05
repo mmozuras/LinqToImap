@@ -1,8 +1,8 @@
 ﻿namespace LinqToGmail.Query
 {
-    using Imap;
     using System.Linq;
     using System.Linq.Expressions;
+    using Imap;
     using Remotion.Data.Linq;
     using Remotion.Data.Linq.Parsing.Structure;
 
@@ -12,7 +12,8 @@
         {
         }
 
-        internal GmailQueryable(Mailbox mailbox) : base(QueryParser.CreateDefault(), CreateExecutor(mailbox))
+        internal GmailQueryable(Mailbox mailbox)
+            : base(QueryParser.CreateDefault(), CreateExecutor(mailbox))
         {
         }
 

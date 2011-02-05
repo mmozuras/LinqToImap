@@ -5,24 +5,23 @@ namespace LinqToGmail.Imap.Commands
     /// <summary>
     /// Obtains messages from a mailbox.
     /// </summary>
-    public class Fetch : BaseCommand
+    public sealed class Fetch : BaseCommand
     {
-        public IEnumerable<MailboxMessage> Execute(Mailbox mailbox)
+        public Fetch()
         {
-            Write("FETCH 1:* ALL");
-            return ParseMessages();
+            Text = "FETCH 1:* ALL";
         }
 
-        public IEnumerable<MailboxMessage> Execute(Mailbox mailbox, int begin, int end)
+        public Fetch(int begin, int end)
         {
-            Write("FETCH {0}:{1} ALL", begin, end);
-            return ParseMessages();
+            Text = string.Format("FETCH {0}:{1} ALL", begin, end);
         }
 
-        public IEnumerable<MailboxMessage> Execute(Mailbox mailbox, IEnumerable<int> messages)
+        public Fetch(IEnumerable<int> messages)
         {
-            Write("FETCH {0} ALL", string.Join(",", messages));
-            return ParseMessages();
+            Text = string.Format("FETCH {0} ALL", string.Join(",", messages));
         }
+
+        public override string Text { get; protected set; }
     }
 }

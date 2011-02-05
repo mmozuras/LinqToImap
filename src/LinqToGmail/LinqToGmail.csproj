@@ -46,11 +46,18 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Imap\Commands\BaseCommand.cs" />
+    <Compile Include="Imap\Parsing\AddressesParser.cs" />
+    <Compile Include="Imap\Parsing\IParser.cs" />
+    <Compile Include="Imap\Parsing\MailboxMessageParser.cs" />
+    <Compile Include="Imap\Parsing\MailboxMessagesParser.cs" />
+    <Compile Include="Imap\Parsing\MailboxParser.cs" />
+    <Compile Include="Imap\Parsing\SingleLineParser.cs" />
     <Compile Include="Query\GmailQueryable.cs" />
     <Compile Include="Query\GmailQueryExecutor.cs" />
     <Compile Include="Gmail.cs" />
     <Compile Include="Imap\Addresses.cs" />
-    <Compile Include="Imap\Commands\BaseCommand.cs" />
+    <Compile Include="Imap\Commands\ICommand.cs" />
     <Compile Include="Imap\Commands\Fetch.cs" />
     <Compile Include="Imap\Commands\Login.cs" />
     <Compile Include="Imap\Commands\Logout.cs" />

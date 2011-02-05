@@ -15,7 +15,7 @@ namespace LinqToGmail
         {
             get
             {
-                return new Select().Execute("INBOX");
+                return client.Execute<Mailbox>(new Select("INBOX"));
             }
         }
 
@@ -23,7 +23,7 @@ namespace LinqToGmail
 
         public void Dispose()
         {
-            new Logout().Execute();
+            client.Execute(new Logout());
             client.Dispose();
         }
 
@@ -33,7 +33,7 @@ namespace LinqToGmail
         {
             var connection = new ImapSslClient(host, port);
 
-            new Login().Execute(username, password);
+            connection.Execute(new Login(username, password));
             return new Gmail
                        {
                            client = connection,

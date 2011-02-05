@@ -12,10 +12,14 @@
     {
         public IEnumerable<MailboxMessage> Results { get; private set; }
         private readonly Mailbox mailbox;
+        private readonly ImapSslClient imapSslClient;
 
         public GmailQueryModelVisitor(Mailbox mailbox)
         {
             this.mailbox = mailbox;
+
+            //TODO: Figure this out
+            imapSslClient = ImapSslClient.Current;
         }
 
         public override void VisitResultOperator(ResultOperatorBase resultOperator, QueryModel queryModel, int index)
@@ -24,7 +28,9 @@
             {
                 var take = resultOperator as TakeResultOperator;
                 var count = int.Parse(take.Count.ToString());
-                Results = new Fetch().Execute(mailbox, mailbox.MessagesCount - count, mailbox.MessagesCount);
+
+                var command = new Fetch(mailbox.MessagesCount - count, mailbox.MessagesCount);
+                Results = imapSslClient.Execute<IEnumerable<MailboxMessage>>(command);
             }
             else if (resultOperator is AverageResultOperator)
                 throw new NotSupportedException("LinqToExcel does not provide support for the Average() method");

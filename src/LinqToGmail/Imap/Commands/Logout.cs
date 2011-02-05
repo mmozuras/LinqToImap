@@ -1,14 +1,17 @@
 ﻿namespace LinqToGmail.Imap.Commands
 {
+    using System;
+
     /// <summary>
     /// Closes the connection.
     /// </summary>
-    public class Logout : BaseCommand
+    public sealed class Logout : BaseCommand
     {
-        public void Execute()
+        public Logout()
         {
-            Write("LOGOUT");
-            Read();
+            Text = "LOGOUT";
         }
+
+        public override string Text { get; protected set; }
     }
 }
