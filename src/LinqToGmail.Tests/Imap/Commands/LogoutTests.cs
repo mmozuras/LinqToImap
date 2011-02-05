@@ -10,7 +10,7 @@ namespace LinqToGmail.Tests.Imap.Commands
         [Test]
         public void Should_create_a_valid_command()
         {
-            new Logout().Text.ShouldEqual("LOGOUT");
+            new Logout().ToString().ShouldEqual("LOGOUT");
         }
     }
 }
