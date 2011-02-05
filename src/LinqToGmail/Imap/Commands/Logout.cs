@@ -1,7 +1,5 @@
 ﻿namespace LinqToGmail.Imap.Commands
 {
-    using System;
-
     /// <summary>
     /// Closes the connection.
     /// </summary>

@@ -7,6 +7,8 @@ namespace LinqToGmail.Imap.Commands
     {
         public Select(string mailboxName)
         {
+            Ensure.IsNotNullOrWhiteSpace(mailboxName);
+
             Text = string.Format("SELECT {0}", mailboxName);
         }
 

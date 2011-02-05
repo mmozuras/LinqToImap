@@ -47,6 +47,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Imap\Commands\BaseCommand.cs" />
+    <Compile Include="Ensure.cs" />
     <Compile Include="Imap\Parsing\AddressesParser.cs" />
     <Compile Include="Imap\Parsing\IParser.cs" />
     <Compile Include="Imap\Parsing\MailboxMessageParser.cs" />

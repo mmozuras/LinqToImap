@@ -10,9 +10,9 @@ namespace LinqToGmail.Tests.Imap.Parsing
     public class AddressesParserTests
     {
         [Test]
-        public void Should_be_able_to_parse_from_string()
+        public void Should_parse_correctly()
         {
-            string imapAddress = File.ReadAllLines(".\\Imap\\Parsers\\addressCollection.txt")[0];
+            string imapAddress = File.ReadAllLines(".\\Imap\\Parsing\\addresses.txt")[0];
 
             var parser = new AddressesParser();
             var imapAddresses = parser.Parse(imapAddress);

@@ -17,7 +17,7 @@ namespace LinqToGmail.Tests.Imap.Parsing
         }
 
         [Test]
-        public void Should_parse_a_string_with_all_flags()
+        public void Should_parse_all_flags()
         {
             MessageFlags flags = parser.Parse("\\Flagged   \\Answered \\Recent \\Deleted \\Seen    \\Draft");
 
@@ -30,7 +30,7 @@ namespace LinqToGmail.Tests.Imap.Parsing
         }
 
         [Test]
-        public void Should_parse_a_string_with_four_flags()
+        public void Should_parse_four_flags()
         {
             MessageFlags flags = parser.Parse("\\Answered \\Draft \\Deleted \\Seen");
 
