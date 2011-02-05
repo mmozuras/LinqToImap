@@ -10,11 +10,15 @@
 
         public T Parse(IEnumerable<string> input)
         {
-            if (input.Count() != 1)
+            if (input.Count() == 1)
             {
-                throw new ArgumentException(GetType().Name + " can only parse a single line.", "input");
+                return Parse(input.Single());
             }
-            return Parse(input.Single());
+            if (input.Count() == 2 && input.Last().IsOk())
+            {
+                return Parse(input.First());
+            }
+            throw new ArgumentException(GetType().Name + " can only parse a single line.", "input");
         }
 
         #endregion

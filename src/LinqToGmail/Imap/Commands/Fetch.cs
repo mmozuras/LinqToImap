@@ -1,6 +1,7 @@
 namespace LinqToGmail.Imap.Commands
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Obtains messages from a mailbox.
@@ -17,9 +18,16 @@ namespace LinqToGmail.Imap.Commands
             Text = string.Format("FETCH {0}:{1} ALL", begin, end);
         }
 
-        public Fetch(IEnumerable<int> messages)
+        public Fetch(IEnumerable<int> ids)
         {
-            Text = string.Format("FETCH {0} ALL", string.Join(",", messages));
+            if (ids.Any())
+            {
+                Text = string.Format("FETCH {0} ALL", string.Join(",", ids));
+            }
+            else
+            {
+                Text = "FETCH 1:* ALL";
+            }
         }
 
         public override string Text { get; protected set; }

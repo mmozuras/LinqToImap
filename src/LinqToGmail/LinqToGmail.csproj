@@ -49,9 +49,11 @@
     <Compile Include="Imap\CommandExecutor.cs" />
     <Compile Include="Imap\Commands\BaseCommand.cs" />
     <Compile Include="Ensure.cs" />
+    <Compile Include="Imap\Commands\Search.cs" />
     <Compile Include="Imap\ICommandExecutor.cs" />
     <Compile Include="Imap\IImapSslClient.cs" />
     <Compile Include="Imap\Parsing\AddressesParser.cs" />
+    <Compile Include="Imap\Parsing\IdsParser.cs" />
     <Compile Include="Imap\Parsing\IParser.cs" />
     <Compile Include="Imap\Parsing\MailboxMessageParser.cs" />
     <Compile Include="Imap\Parsing\MailboxMessagesParser.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Imap\MessageFlags.cs" />
     <Compile Include="Imap\StringExtensions.cs" />
     <Compile Include="Query\GmailQueryModelVisitor.cs" />
+    <Compile Include="Query\WhereClauseExpressionTreeVisitor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

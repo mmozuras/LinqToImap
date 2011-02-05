@@ -23,7 +23,7 @@
         public IEnumerable<string> Execute(ICommand command)
         {
             imapSslClient.Write(command.Text);
-            var responses = ReadRespones().ToList();
+            var responses = ReadResponses().ToList();
 
             if (!responses.Last().IsOk())
             {
@@ -37,15 +37,15 @@
         {
             var responses = Execute(command);
 
-            var parserType = Enumerable.Single<Type>(Assembly.GetExecutingAssembly()
-                                  .GetTypes()
-                                  .Where(typeof(IParser<T>).IsAssignableFrom));
+            var parserType = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(typeof(IParser<T>).IsAssignableFrom).Single();
 
             var parser = (IParser<T>)Activator.CreateInstance(parserType);
             return parser.Parse(responses);
         }
 
-        private IEnumerable<string> ReadRespones()
+        private IEnumerable<string> ReadResponses()
         {
             string response;
             do

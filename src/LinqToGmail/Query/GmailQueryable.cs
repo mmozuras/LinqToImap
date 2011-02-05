@@ -12,14 +12,14 @@
         {
         }
 
-        internal GmailQueryable(Mailbox mailbox)
-            : base(QueryParser.CreateDefault(), CreateExecutor(mailbox))
+        public GmailQueryable(ICommandExecutor commandExecutor)
+            : base(QueryParser.CreateDefault(), CreateExecutor(commandExecutor))
         {
         }
 
-        private static IQueryExecutor CreateExecutor(Mailbox mailbox)
+        private static IQueryExecutor CreateExecutor(ICommandExecutor commandExecutor)
         {
-            return new GmailQueryExecutor(mailbox);
+            return new GmailQueryExecutor(commandExecutor);
         }
     }
 }

@@ -46,6 +46,7 @@
     <Reference Include="pnunit.framework">
       <HintPath>..\..\packages\NUnit.2.5.7.10213\lib\pnunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.92.1, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL" />
     <Reference Include="Should">
       <HintPath>..\..\packages\Should.1.1.12.0\lib\Should.dll</HintPath>
     </Reference>
@@ -65,12 +66,14 @@
     <Compile Include="Imap\Commands\FetchTests.cs" />
     <Compile Include="Imap\Commands\LoginTests.cs" />
     <Compile Include="Imap\Commands\LogoutTests.cs" />
+    <Compile Include="Imap\Commands\SearchTests.cs" />
     <Compile Include="Imap\Commands\SelectTests.cs" />
     <Compile Include="Imap\Parsing\AddressesParserTests.cs" />
     <Compile Include="Imap\Parsing\MailboxMessageParserTests.cs" />
     <Compile Include="Imap\Parsing\MailboxMessagesParserTests.cs" />
     <Compile Include="Imap\Parsing\MailboxParserTests.cs" />
     <Compile Include="Imap\Parsing\MessageFlagsParserTests.cs" />
+    <Compile Include="Query\GmailQueryableTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

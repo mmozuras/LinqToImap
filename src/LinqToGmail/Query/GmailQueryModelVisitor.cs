@@ -12,11 +12,23 @@
     {
         public IList<Action<ICommandExecutor>> Actions { get; private set; }
         public IEnumerable<MailboxMessage> Results { get; private set; }
-        private readonly Mailbox mailbox;        
 
-        public GmailQueryModelVisitor(Mailbox mailbox)
+        public GmailQueryModelVisitor()
         {
-            this.mailbox = mailbox;
+            Actions = new List<Action<ICommandExecutor>>();
+        }
+
+        public override void VisitWhereClause(WhereClause whereClause, QueryModel queryModel, int index)
+        {
+            var where = new WhereClauseExpressionTreeVisitor();
+            where.VisitExpression(whereClause.Predicate);
+
+            Actions.Add(executor =>
+                            {
+                                var ids = executor.Execute<IEnumerable<int>>(where.Command);
+                                var fetch = new Fetch(ids);
+                                Results = executor.Execute<IEnumerable<MailboxMessage>>(fetch);
+                            }); 
         }
 
         public override void VisitResultOperator(ResultOperatorBase resultOperator, QueryModel queryModel, int index)
@@ -28,8 +40,8 @@
 
                 Actions.Add(executor =>
                                 {
-                                    var fetch = new Fetch(mailbox.MessagesCount - count, mailbox.MessagesCount);
-                                    executor.Execute<IEnumerable<MailboxMessage>>(fetch);
+                                    var fetch = new Fetch(1, count);
+                                    Results = executor.Execute<IEnumerable<MailboxMessage>>(fetch);
                                 });
             }
             else if (resultOperator is AverageResultOperator)

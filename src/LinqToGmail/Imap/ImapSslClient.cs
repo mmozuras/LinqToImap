@@ -1,6 +1,7 @@
 namespace LinqToGmail.Imap
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
     using System.Net.Security;
     using System.Net.Sockets;
@@ -47,7 +48,7 @@ namespace LinqToGmail.Imap
         }
 
         public string Read()
-        {            
+        {
             return streamReader.ReadLine();
         }
     }

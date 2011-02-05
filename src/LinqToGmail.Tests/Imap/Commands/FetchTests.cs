@@ -24,5 +24,11 @@ namespace LinqToGmail.Tests.Imap.Commands
         {
             new Fetch().Text.ShouldEqual("FETCH 1:* ALL");
         }
+
+        [Test]
+        public void Should_create_a_command_that_fetches_all_messages_from_empty_collection()
+        {
+            new Fetch(new int[]{}).Text.ShouldEqual("FETCH 1:* ALL");
+        }
     }
 }

@@ -9,8 +9,8 @@ namespace LinqToGmail.Imap
         {
             Flags = new MessageFlags();
 
-            //TODO: This looks fishy
-            Messages = new GmailQueryable<MailboxMessage>(this);
+            //TODO: This should be fixed.
+            Messages = new GmailQueryable<MailboxMessage>(CommandExecutor.Current);
         }
 
         public int MessagesCount { get; internal set; }

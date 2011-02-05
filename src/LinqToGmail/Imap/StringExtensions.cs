@@ -24,7 +24,7 @@ namespace LinqToGmail.Imap
 
         internal static bool IsOk(this string response)
         {
-            return response.StartsWith("* OK") || response.Substring(7, 2) == "OK";
+            return response.StartsWith("* OK") || (response.Length > 7 && response.Substring(7, 2) == "OK");
         }
 
         internal static bool HasInfo(this string response)
