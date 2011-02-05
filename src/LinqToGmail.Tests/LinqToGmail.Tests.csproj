@@ -61,8 +61,8 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Imap\Parsers\AddressesParserTests.cs" />
-    <Compile Include="Imap\MessageFlagsTests.cs" />
+    <Compile Include="Imap\Parsing\AddressesParserTests.cs" />
+    <Compile Include="Imap\Parsing\MessageFlagsParserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -74,10 +74,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Imap\Parsers\mailboxMessage.txt">
+    <Content Include="Imap\Parsing\mailboxMessage.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imap\addressCollection.txt">
+    <Content Include="Imap\Parsing\addressCollection.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

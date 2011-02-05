@@ -9,7 +9,7 @@ namespace LinqToGmail.Imap.Parsing
 
     public class AddressesParser : SingleLineParser<Addresses>
     {
-        protected override Addresses Parse(string addresses)
+        public override Addresses Parse(string addresses)
         {
             IEnumerable<string> split = addresses.Trim()
                 .Split(new[] {"))"}, StringSplitOptions.RemoveEmptyEntries)

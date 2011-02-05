@@ -6,12 +6,15 @@
 
     public class MailboxMessageParser : SingleLineParser<MailboxMessage>
     {
-        protected override MailboxMessage Parse(string input)
+        public override MailboxMessage Parse(string input)
         {
+            var messageFlagsParser = new MessageFlagsParser();
+
+            //TODO: Using ExpandoObject for now, cause it's simplier, will refactor.
             dynamic message = new ExpandoObject();
 
             input.RegexMatch(@"\* (\d*)", m => { message.Id = Convert.ToInt32(m); });
-            input.RegexMatch(@"FLAGS \(([^\)]*)\)", m => { message.Flags = MessageFlags.Parse(m); });
+            input.RegexMatch(@"FLAGS \(([^\)]*)\)", m => { message.Flags = messageFlagsParser.Parse(m); });
             input.RegexMatch(@"INTERNALDATE ""([^""]+)""", m => { message.Received = DateTime.Parse(m); });
             input.RegexMatch(@"RFC822.SIZE (\d+)", m => { message.Size = Convert.ToInt32(m); });
             input = input.Replace("ENVELOPE", string.Empty);
@@ -32,7 +35,7 @@
             input.Remove(0, subject.Length).RegexMatch(@"""<([^>]+)>""", m => { message.ReferenceId = m; });
 
             var addressesParser = new AddressesParser();
-            message.Addresses = addressesParser.Parse(new[] {input});
+            message.Addresses = addressesParser.Parse(input);
 
             return new MailboxMessage(message.Id, message.ReferenceId, message.Subject, message.Flags, message.Addresses,
                                       message.Received, message.Sent, message.TimeZone, message.Size);

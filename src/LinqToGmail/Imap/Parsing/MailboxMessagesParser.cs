@@ -12,7 +12,7 @@ namespace LinqToGmail.Imap.Parsing
             return (from response in input
                     where response.HasInfo()
                     let messageParser = new MailboxMessageParser()
-                    let mailboxMessage = messageParser.Parse(new[] {response})
+                    let mailboxMessage = messageParser.Parse(response)
                     select mailboxMessage).ToList();
         }
 

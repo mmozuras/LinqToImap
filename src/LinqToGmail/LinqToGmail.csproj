@@ -52,6 +52,7 @@
     <Compile Include="Imap\Parsing\MailboxMessageParser.cs" />
     <Compile Include="Imap\Parsing\MailboxMessagesParser.cs" />
     <Compile Include="Imap\Parsing\MailboxParser.cs" />
+    <Compile Include="Imap\Parsing\MessageFlagsParser.cs" />
     <Compile Include="Imap\Parsing\SingleLineParser.cs" />
     <Compile Include="Query\GmailQueryable.cs" />
     <Compile Include="Query\GmailQueryExecutor.cs" />

@@ -1,4 +1,4 @@
-namespace LinqToGmail.Tests.Imap.Parsers
+namespace LinqToGmail.Tests.Imap.Parsing
 {
     using System.IO;
     using System.Linq;
@@ -12,10 +12,10 @@ namespace LinqToGmail.Tests.Imap.Parsers
         [Test]
         public void Should_be_able_to_parse_from_string()
         {
-            string imapAddress = File.ReadAllLines(".\\Imap\\addressCollection.txt")[0];
+            string imapAddress = File.ReadAllLines(".\\Imap\\Parsers\\addressCollection.txt")[0];
 
             var parser = new AddressesParser();
-            var imapAddresses = parser.Parse(new[] {imapAddress});
+            var imapAddresses = parser.Parse(imapAddress);
 
             imapAddresses.To.Single().ToString().ShouldEqual("\"jane.doe@mail.com\" <jane.doe@mail.com>");
 

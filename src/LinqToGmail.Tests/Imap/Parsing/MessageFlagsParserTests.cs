@@ -1,16 +1,25 @@
-namespace LinqToGmail.Tests.Imap
+namespace LinqToGmail.Tests.Imap.Parsing
 {
     using LinqToGmail.Imap;
+    using LinqToGmail.Imap.Parsing;
     using NUnit.Framework;
     using Should;
 
     [TestFixture]
-    public class MessageFlagsTests
+    public class MessageFlagsParserTests
     {
+        private MessageFlagsParser parser;
+
+        [SetUp]
+        public void SetUp()
+        {
+            parser = new MessageFlagsParser();
+        }
+
         [Test]
         public void Should_parse_a_string_with_all_flags()
         {
-            MessageFlags flags = MessageFlags.Parse("\\Flagged   \\Answered \\Recent \\Deleted \\Seen    \\Draft");
+            MessageFlags flags = parser.Parse("\\Flagged   \\Answered \\Recent \\Deleted \\Seen    \\Draft");
 
             flags.Answered.ShouldBeTrue();
             flags.Flagged.ShouldBeTrue();
@@ -23,7 +32,7 @@ namespace LinqToGmail.Tests.Imap
         [Test]
         public void Should_parse_a_string_with_four_flags()
         {
-            MessageFlags flags = MessageFlags.Parse("\\Answered \\Draft \\Deleted \\Seen");
+            MessageFlags flags = parser.Parse("\\Answered \\Draft \\Deleted \\Seen");
 
             flags.Answered.ShouldBeTrue();
             flags.Draft.ShouldBeTrue();
@@ -37,7 +46,7 @@ namespace LinqToGmail.Tests.Imap
         [Test]
         public void Should_parse_an_empty_string()
         {
-            MessageFlags flags = MessageFlags.Parse(string.Empty);
+            MessageFlags flags = parser.Parse(string.Empty);
 
             flags.Answered.ShouldBeFalse();
             flags.Flagged.ShouldBeFalse();

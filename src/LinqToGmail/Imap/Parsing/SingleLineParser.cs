@@ -19,6 +19,6 @@
 
         #endregion
 
-        protected abstract T Parse(string input);
+        public abstract T Parse(string input);
     }
 }
