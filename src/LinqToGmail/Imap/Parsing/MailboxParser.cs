@@ -7,8 +7,6 @@
 
     public class MailboxParser : IParser<IMailbox>
     {
-        #region IParser<Mailbox> Members
-
         public IMailbox Parse(IEnumerable<string> input)
         {
             var last = input.Last();
@@ -30,7 +28,5 @@
             }
             return imapMailbox;
         }
-
-        #endregion
     }
 }

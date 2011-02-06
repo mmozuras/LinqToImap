@@ -6,8 +6,6 @@
 
     public abstract class SingleLineParser<T> : IParser<T>
     {
-        #region IParser<T> Members
-
         public T Parse(IEnumerable<string> input)
         {
             if (input.Count() == 1)
@@ -20,8 +18,6 @@
             }
             throw new ArgumentException(GetType().Name + " can only parse a single line.", "input");
         }
-
-        #endregion
 
         public abstract T Parse(string input);
     }

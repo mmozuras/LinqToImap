@@ -20,15 +20,11 @@ namespace LinqToGmail
             }
         }
 
-        #region IDisposable Members
-
         public void Dispose()
         {
             commandExecutor.Execute(new Logout());
             client.Dispose();
         }
-
-        #endregion
 
         public static Gmail Login(string username, string password)
         {

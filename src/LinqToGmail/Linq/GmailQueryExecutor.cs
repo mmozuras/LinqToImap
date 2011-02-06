@@ -19,8 +19,6 @@
             this.commandExecutor = commandExecutor;
         }
 
-        #region IQueryExecutor Members
-
         public T ExecuteScalar<T>(QueryModel queryModel)
         {
             return ExecuteSingle<T>(queryModel, false);
@@ -64,7 +62,5 @@
             }
             throw new ApplicationException("Something went wrong with your LINQ query. Please report it as a bug.");
         }
-
-        #endregion
     }
 }

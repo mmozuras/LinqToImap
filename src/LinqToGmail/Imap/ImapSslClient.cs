@@ -29,19 +29,15 @@ namespace LinqToGmail.Imap
             }
         }
 
-        #region IDisposable Members
-
         public void Dispose()
         {
             tcpClient.Close();
         }
 
-        #endregion
-
         public void Write(string message)
         {
             string tagNumber = (tag++).ToString("D4");
-            var taggedMessage = string.Format("kw{0} {1}{2}", tagNumber, message, Environment.NewLine);
+            string taggedMessage = string.Format("kw{0} {1}{2}", tagNumber, message, Environment.NewLine);
             byte[] command = Encoding.ASCII.GetBytes(taggedMessage);
             sslStream.Write(command, 0, command.Length);
         }

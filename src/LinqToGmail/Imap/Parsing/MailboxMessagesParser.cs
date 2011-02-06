@@ -5,8 +5,6 @@ namespace LinqToGmail.Imap.Parsing
 
     public class MailboxMessagesParser : IParser<IEnumerable<MailboxMessage>>
     {
-        #region IParser<IEnumerable<MailboxMessage>> Members
-
         public IEnumerable<MailboxMessage> Parse(IEnumerable<string> input)
         {
             return (from response in input
@@ -15,7 +13,5 @@ namespace LinqToGmail.Imap.Parsing
                     let mailboxMessage = messageParser.Parse(response)
                     select mailboxMessage).ToList();
         }
-
-        #endregion
     }
 }
