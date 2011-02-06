@@ -15,7 +15,7 @@ namespace LinqToGmail.Tests.Imap.Commands
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
-        public void Should_throw_exception_if_mailbox_name_is_empty()
+        public void Should_ensure_that_mailbox_name_is_not_empty()
         {
             new Select(string.Empty);
         }

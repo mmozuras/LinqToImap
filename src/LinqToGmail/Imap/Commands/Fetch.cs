@@ -13,6 +13,8 @@ namespace LinqToGmail.Imap.Commands
 
         public Fetch(IntRange range)
         {
+            Ensure.IsNotNull(range, "range");
+
             Text = string.Format("FETCH {0} ALL", range);
         }
 
@@ -29,5 +31,5 @@ namespace LinqToGmail.Imap.Commands
         }
 
         public override string Text { get; protected set; }
-    }    
+    }
 }

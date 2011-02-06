@@ -15,19 +15,19 @@ namespace LinqToGmail.Tests.Imap.Commands
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
-        public void Should_throw_exception_if_username_is_empty()
+        public void Should_ensure_that_username_is_not_empty()
         {
             new Login(null, "password");
         }
 
         [Test, ExpectedException(typeof (ArgumentException))]
-        public void Should_throw_exception_if_password_is_empty()
+        public void Should_ensure_that_password_is_not_empty()
         {
             new Login("username", string.Empty);
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
-        public void Should_throw_exception_if_username_is_whitespace()
+        public void Should_ensure_that_password_is_not_whitespace()
         {
             new Login("   ", "password");
         }

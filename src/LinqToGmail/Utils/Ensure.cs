@@ -19,5 +19,13 @@ namespace LinqToGmail.Utils
                 throw new ArgumentException("Parameter should not be null or whitespace.", paramName);
             }
         }
+
+        public static void IsNotNull<T>(T obj, string paramName) where T : class
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException(paramName);
+            }
+        }
     }
 }

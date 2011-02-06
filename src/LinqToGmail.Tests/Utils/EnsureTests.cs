@@ -21,5 +21,12 @@ namespace LinqToGmail.Tests.Utils
         {
             Ensure.IsNotNullOrWhiteSpace(null, "Parameter");
         }
+
+        [Test]
+        public void Should_ensure_that_object_is_not_null()
+        {
+            Ensure.IsNotNull(string.Empty, "string");
+            Assert.Throws(typeof (ArgumentNullException), () => Ensure.IsNotNull((object) null, "s"));
+        }
     }
 }

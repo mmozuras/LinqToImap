@@ -81,14 +81,42 @@
                                     }
                                 });
             }
+            else if (resultOperator is FirstResultOperator)
+            {
+                Actions.Add(executor =>
+                                {
+                                    if (Ids != null)
+                                    {
+                                        Ids = new[] {Ids.First()};
+                                    }
+                                    else if (Range != null)
+                                    {
+                                        Ids = new[] {Range.From};
+                                        Range = null;
+                                    }
+                                });
+            }
+            else if (resultOperator is LastResultOperator)
+            {
+                Actions.Add(executor =>
+                                {
+                                    if (Ids != null)
+                                    {
+                                        Ids = new[] {Ids.Last()};
+                                    }
+                                    else if (Range != null)
+                                    {
+                                        Ids = new[] {Range.To};
+                                        Range = null;
+                                    }
+                                });
+            }
             else if (resultOperator is AverageResultOperator)
                 throw new NotSupportedException("LinqToGmail does not provide support for the Average() method");
             else if (resultOperator is CountResultOperator)
                 throw new NotSupportedException("LinqToGmail does not provide support for the Count() method");
             else if (resultOperator is LongCountResultOperator)
                 throw new NotSupportedException("LinqToGmail does not provide support for the LongCount() method");
-            else if (resultOperator is FirstResultOperator)
-                throw new NotSupportedException("LinqToGmail does not provide support for the First() method");
             else if (resultOperator is MaxResultOperator)
                 throw new NotSupportedException("LinqToGmail does not provide support for the Max() method");
             else if (resultOperator is MinResultOperator)

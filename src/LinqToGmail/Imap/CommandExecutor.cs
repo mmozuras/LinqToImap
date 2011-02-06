@@ -18,6 +18,7 @@
             Current = this;
         }
 
+        //TODO: This could be done better (CommandExecutor.Current)
         public static ICommandExecutor Current { get; private set; }
 
         public IEnumerable<string> Execute(Command command)

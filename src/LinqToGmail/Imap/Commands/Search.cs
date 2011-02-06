@@ -13,6 +13,8 @@ namespace LinqToGmail.Imap.Commands
 
         public Search(IntRange range, IEnumerable<KeyValuePair<string, string>> query)
         {
+            Ensure.IsNotNull(range, "range");
+
             Text = string.Format("SEARCH {0} {1}", range, QueryToString(query));
         }
 

@@ -9,7 +9,6 @@ namespace LinqToGmail.Imap.Commands
             Ensure.IsNotNullOrWhiteSpace(username, "username");
             Ensure.IsNotNullOrWhiteSpace(password, "password");
 
-            //TODO: Gmail supports AUTH and XAUTH
             Text = string.Format("LOGIN {0} {1}", username, password);
         }
 
