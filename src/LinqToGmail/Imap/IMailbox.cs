@@ -2,7 +2,7 @@
 {
     using System.Linq;
 
-    public interface IMailbox
+    public interface IMailbox : IQueryable<MailboxMessage>
     {
         string Name { get; }
         int MessagesCount { get; }

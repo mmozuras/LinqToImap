@@ -38,9 +38,18 @@
         {
             var responses = Execute(command);
 
-            var parserType = Assembly.GetExecutingAssembly()
-                .GetTypes()
-                .Where(typeof(IParser<T>).IsAssignableFrom).Single();
+            Type parserType;
+            //NOTE: Workaround - needed, cause IMailbox is also IEnumerable<MailboxMessage>, so it finds two parsers.
+            if (typeof(T) == typeof(IEnumerable<MailboxMessage>))
+            {
+                parserType = typeof (MailboxMessagesParser);
+            }
+            else
+            {
+                parserType = Assembly.GetExecutingAssembly()
+                    .GetTypes()
+                    .Where(typeof (IParser<T>).IsAssignableFrom).Single();
+            }
 
             var parser = (IParser<T>)Activator.CreateInstance(parserType);
             return parser.Parse(responses);

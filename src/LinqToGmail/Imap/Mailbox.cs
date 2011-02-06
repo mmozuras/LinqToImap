@@ -1,6 +1,10 @@
 namespace LinqToGmail.Imap
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Linq.Expressions;
     using Linq;
 
     public class Mailbox : IMailbox
@@ -22,5 +26,30 @@ namespace LinqToGmail.Imap
         public IQueryable<MailboxMessage> Messages { get; private set; }
 
         public bool ReadableAndWritable { get; internal set; }
+
+        public IEnumerator<MailboxMessage> GetEnumerator()
+        {
+            return Messages.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public Expression Expression
+        {
+            get { return Messages.Expression; }
+        }
+
+        public Type ElementType
+        {
+            get { return Messages.ElementType; }
+        }
+
+        public IQueryProvider Provider
+        {
+            get { return Messages.Provider; }
+        }
     }
 }
