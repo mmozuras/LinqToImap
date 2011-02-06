@@ -13,8 +13,7 @@ namespace LinqToGmail.IntegrationTests
         {
             using (var gmail = Gmail.Login(GmailLogin.Username, GmailLogin.Password))
             {
-                var messages = gmail.Inbox.Messages.Take(50).ToList();
-//TODO:                var messages = gmail.Inbox.Messages.Where(x => x.Subject.Contains("a")).ToList();
+                var messages = gmail.Inbox.Messages.Where(x => x.Subject.Contains("a")).Take(50).ToList();
 
                 Console.WriteLine(string.Join(Environment.NewLine, messages));
                 messages.Count().ShouldBeInRange(1, 1000);

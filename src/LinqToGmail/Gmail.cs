@@ -12,11 +12,11 @@ namespace LinqToGmail
         private IImapSslClient client;
         private ICommandExecutor commandExecutor;
 
-        public Mailbox Inbox
+        public IMailbox Inbox
         {
             get
             {
-                return commandExecutor.Execute<Mailbox>(new Select("INBOX"));
+                return commandExecutor.Execute(new Select("INBOX"));
             }
         }
 

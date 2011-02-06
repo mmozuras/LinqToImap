@@ -1,9 +1,6 @@
 ﻿namespace LinqToGmail.Imap.Commands
 {
-    /// <summary>
-    /// Closes the connection.
-    /// </summary>
-    public sealed class Logout : BaseCommand
+    public sealed class Logout : Command
     {
         public Logout()
         {

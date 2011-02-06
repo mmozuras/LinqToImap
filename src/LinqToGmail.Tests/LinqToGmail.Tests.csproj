@@ -62,8 +62,12 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="EnsureTests.cs" />
-    <Compile Include="Imap\Commands\FetchTests.cs" />
+    <Compile Include="Imap\Parsing\IdsParserTests.cs" />
+    <Compile Include="Imap\Parsing\UidsParserTests.cs" />
+    <Compile Include="Utils\EnsureTests.cs" />
+    <Compile Include="Imap\Commands\CommandTests.cs" />
+    <Compile Include="Imap\Commands\FetchAllTests.cs" />
+    <Compile Include="Imap\Commands\FetchUidsTests.cs" />
     <Compile Include="Imap\Commands\LoginTests.cs" />
     <Compile Include="Imap\Commands\LogoutTests.cs" />
     <Compile Include="Imap\Commands\SearchTests.cs" />
@@ -73,7 +77,7 @@
     <Compile Include="Imap\Parsing\MailboxMessagesParserTests.cs" />
     <Compile Include="Imap\Parsing\MailboxParserTests.cs" />
     <Compile Include="Imap\Parsing\MessageFlagsParserTests.cs" />
-    <Compile Include="Query\GmailQueryableTests.cs" />
+    <Compile Include="Linq\GmailQueryableTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

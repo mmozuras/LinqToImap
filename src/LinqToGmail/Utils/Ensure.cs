@@ -1,4 +1,4 @@
-namespace LinqToGmail
+namespace LinqToGmail.Utils
 {
     using System;
 

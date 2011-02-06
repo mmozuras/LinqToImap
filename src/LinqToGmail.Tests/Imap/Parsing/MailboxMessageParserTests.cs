@@ -20,7 +20,7 @@ namespace LinqToGmail.Tests.Imap.Parsing
         [Test]
         public void Should_parse_a_normal_message()
         {
-            string message = File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt")[0];
+            var message = File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt")[0];
 
             var mailboxMessage = parser.Parse(new[] {message});
 

@@ -18,12 +18,12 @@
                                 @"* 5 RECENT",
                                 @"* OK [UIDVALIDITY 1062186210]",
                                 @"* OK [UIDNEXT 1246]",
-                                @"a03 OK [READ-WRITE] Completed",
+                                @"a03 OK [READ-WRITE] Inbox selected. (Success)",
                             };
-
             var parser = new MailboxParser();
             var mailbox = parser.Parse(input);
 
+            mailbox.Name.ShouldEqual("Inbox");
             mailbox.Flags.Answered.ShouldEqual(true);
             mailbox.MessagesCount.ShouldEqual(1242);
             mailbox.RecentMessagesCount.ShouldEqual(5);

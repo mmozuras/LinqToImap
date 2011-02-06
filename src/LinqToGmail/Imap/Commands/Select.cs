@@ -1,9 +1,8 @@
 namespace LinqToGmail.Imap.Commands
 {
-    /// <summary>
-    /// Opens a mailbox with a summary of its status
-    /// </summary>
-    public sealed class Select : BaseCommand
+    using Utils;
+
+    public sealed class Select : Command<IMailbox>
     {
         public Select(string mailboxName)
         {

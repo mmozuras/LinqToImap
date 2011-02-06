@@ -3,33 +3,31 @@ namespace LinqToGmail.Imap.Commands
     using System.Collections.Generic;
     using System.Linq;
 
-    /// <summary>
-    /// Obtains messages from a mailbox.
-    /// </summary>
-    public sealed class Fetch : BaseCommand
+    public abstract class Fetch<T> : Command<T>
     {
-        public Fetch()
+        protected Fetch()
         {
-            Text = "FETCH 1:* ALL";
+            Text = string.Format("FETCH 1:* {0}", Modifier);
         }
 
-        public Fetch(int begin, int end)
+        protected Fetch(int begin, int end)
         {
-            Text = string.Format("FETCH {0}:{1} ALL", begin, end);
+            Text = string.Format("FETCH {0}:{1} {2}", begin, end, Modifier);
         }
 
-        public Fetch(IEnumerable<int> ids)
+        protected Fetch(IEnumerable<int> ids)
         {
             if (ids.Any())
             {
-                Text = string.Format("FETCH {0} ALL", string.Join(",", ids));
+                Text = string.Format("FETCH {0} {1}", string.Join(",", ids), Modifier);
             }
             else
             {
-                Text = "FETCH 1:* ALL";
+                Text = string.Format("FETCH 1:* {0}", Modifier);
             }
         }
 
+        protected abstract string Modifier { get; }
         public override string Text { get; protected set; }
-    }
+    }    
 }

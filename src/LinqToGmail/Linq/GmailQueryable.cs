@@ -1,4 +1,4 @@
-﻿namespace LinqToGmail.Query
+﻿namespace LinqToGmail.Linq
 {
     using System.Linq;
     using System.Linq.Expressions;
@@ -12,14 +12,14 @@
         {
         }
 
-        public GmailQueryable(ICommandExecutor commandExecutor)
-            : base(QueryParser.CreateDefault(), CreateExecutor(commandExecutor))
+        public GmailQueryable(string mailboxName, ICommandExecutor commandExecutor)
+            : base(QueryParser.CreateDefault(), CreateExecutor(mailboxName, commandExecutor))
         {
         }
 
-        private static IQueryExecutor CreateExecutor(ICommandExecutor commandExecutor)
+        private static IQueryExecutor CreateExecutor(string mailboxName, ICommandExecutor commandExecutor)
         {
-            return new GmailQueryExecutor(commandExecutor);
+            return new GmailQueryExecutor(mailboxName, commandExecutor);
         }
     }
 }

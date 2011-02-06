@@ -1,16 +1,15 @@
-﻿namespace LinqToGmail.Query
+﻿namespace LinqToGmail.Linq
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
-    using Imap.Commands;
     using Remotion.Data.Linq.Parsing;
 
-    public class WhereClauseExpressionTreeVisitor : ThrowingExpressionTreeVisitor
+    public class WhereExpressionVisitor : ThrowingExpressionTreeVisitor
     {
         private string name;
-        public ICommand Command { get; private set; }
+        public IDictionary<string, string> SearchParameters { get; private set; }
 
         protected override Exception CreateUnhandledItemException<T>(T unhandledItem, string visitMethod)
         {
@@ -24,7 +23,7 @@
                 VisitExpression(expression.Object);
 
                 var value = expression.Arguments.First().ToString().Replace("\"", string.Empty);
-                Command = new Search(new Dictionary<string, string> {{name, value}});
+                SearchParameters = new Dictionary<string, string> {{name, value}};
             }
             return expression;
         }

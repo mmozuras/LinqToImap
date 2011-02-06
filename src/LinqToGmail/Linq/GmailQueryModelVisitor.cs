@@ -1,34 +1,85 @@
-﻿namespace LinqToGmail.Query
+﻿namespace LinqToGmail.Linq
 {
+    using System.Linq;
     using Imap;
     using Imap.Commands;
     using System;
     using System.Collections.Generic;
     using Remotion.Data.Linq;
     using Remotion.Data.Linq.Clauses;
+    using Remotion.Data.Linq.Clauses.Expressions;
     using Remotion.Data.Linq.Clauses.ResultOperators;
 
     internal class GmailQueryModelVisitor : QueryModelVisitorBase
     {
         public IList<Action<ICommandExecutor>> Actions { get; private set; }
-        public IEnumerable<MailboxMessage> Results { get; private set; }
 
-        public GmailQueryModelVisitor()
+        public QueryState QueryState { get; private set; }
+
+        public GmailQueryModelVisitor(string mailboxName)
         {
-            Actions = new List<Action<ICommandExecutor>>();
+            QueryState = new QueryState();
+            Actions = new List<Action<ICommandExecutor>>
+                          {
+                              executor =>
+                                  {
+                                      var select = new Select(mailboxName);
+                                      QueryState.To = executor.Execute(select).MessagesCount;
+                                      QueryState.From = 1;
+                                  }
+                          };
         }
 
         public override void VisitWhereClause(WhereClause whereClause, QueryModel queryModel, int index)
         {
-            var where = new WhereClauseExpressionTreeVisitor();
+            var where = new WhereExpressionVisitor();
             where.VisitExpression(whereClause.Predicate);
 
             Actions.Add(executor =>
                             {
-                                var ids = executor.Execute<IEnumerable<int>>(where.Command);
-                                var fetch = new Fetch(ids);
-                                Results = executor.Execute<IEnumerable<MailboxMessage>>(fetch);
+                                if (QueryState.Ids != null)
+                                {
+                                    var fetchUids = new FetchUids(QueryState.Ids);
+                                    QueryState.Uids = executor.Execute(fetchUids);
+                                }
+                                else if (QueryState.From.HasValue && QueryState.To.HasValue)
+                                {
+                                    var fetchFrom = new FetchUids(new[] {QueryState.From.Value});
+                                    var fetchTo = new FetchUids(new[] {QueryState.To.Value});
+
+                                    var enumerable = executor.Execute(fetchFrom);
+                                    QueryState.FromUid = enumerable.Single();
+                                    QueryState.ToUid = executor.Execute(fetchTo).Single();
+                                }
+
+                                if (QueryState.Uids != null)
+                                {
+                                    where.SearchParameters.Add("UID", string.Join(",", QueryState.Uids));
+                                }
+                                else if (QueryState.From != null)
+                                {
+                                    where.SearchParameters.Add("UID", QueryState.FromUid + ":" + QueryState.ToUid);
+                                }
+
+                                var search = new Search(where.SearchParameters);
+                                QueryState.Ids = executor.Execute(search);
+
+                                QueryState.From = null;
+                                QueryState.To = null;
+                                QueryState.FromUid = null;
+                                QueryState.ToUid = null;
+                                QueryState.Uids = null;
                             }); 
+        }
+
+        public override void VisitMainFromClause(MainFromClause fromClause, QueryModel queryModel)
+        {
+            if (fromClause.FromExpression is SubQueryExpression)
+            {
+                var subQuery = (SubQueryExpression) fromClause.FromExpression;
+                VisitQueryModel(subQuery.QueryModel);
+            }
+            base.VisitMainFromClause(fromClause, queryModel);
         }
 
         public override void VisitResultOperator(ResultOperatorBase resultOperator, QueryModel queryModel, int index)
@@ -40,8 +91,18 @@
 
                 Actions.Add(executor =>
                                 {
-                                    var fetch = new Fetch(1, count);
-                                    Results = executor.Execute<IEnumerable<MailboxMessage>>(fetch);
+                                    if (QueryState.Ids != null)
+                                    {
+                                        QueryState.Ids = QueryState.Ids.Take(count);
+                                    }
+                                    else if (QueryState.From != null)
+                                    {
+                                        QueryState.To = QueryState.From + count - 1;
+                                    }
+
+                                    QueryState.FromUid = null;
+                                    QueryState.ToUid = null;
+                                    QueryState.Uids = null;
                                 });
             }
             else if (resultOperator is AverageResultOperator)

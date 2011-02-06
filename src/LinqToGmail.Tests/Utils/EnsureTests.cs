@@ -1,6 +1,7 @@
-namespace LinqToGmail.Tests
+namespace LinqToGmail.Tests.Utils
 {
     using System;
+    using LinqToGmail.Utils;
     using NUnit.Framework;
 
     [TestFixture]
@@ -15,10 +16,10 @@ namespace LinqToGmail.Tests
             Assert.Throws(typeof (ArgumentException), () => Ensure.IsNotNullOrWhiteSpace("    "));
         }
 
-        [Test, ExpectedException(typeof (ArgumentException), ExpectedMessage = "Parameter should not be null or whitespace.\r\nParameter name: Param")]
-        public void Should_use_paramName_in_exception_message()
+        [Test, ExpectedException(typeof (ArgumentException), ExpectedMessage = "Parameter should not be null or whitespace.\r\nParameter name: Parameter")]
+        public void Should_use_parameter_name_in_exception_message()
         {
-            Ensure.IsNotNullOrWhiteSpace(null, "Param");
+            Ensure.IsNotNullOrWhiteSpace(null, "Parameter");
         }
     }
 }

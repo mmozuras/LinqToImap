@@ -18,9 +18,9 @@
             Current = this;
         }
 
-        public static ICommandExecutor Current { get; private set; }  
+        public static ICommandExecutor Current { get; private set; }
 
-        public IEnumerable<string> Execute(ICommand command)
+        public IEnumerable<string> Execute(Command command)
         {
             imapSslClient.Write(command.Text);
             var responses = ReadResponses().ToList();
@@ -33,7 +33,7 @@
             return responses;
         }
 
-        public T Execute<T>(ICommand command)
+        public T Execute<T>(Command command)
         {
             var responses = Execute(command);
 
@@ -43,6 +43,11 @@
 
             var parser = (IParser<T>)Activator.CreateInstance(parserType);
             return parser.Parse(responses);
+        }
+
+        public T Execute<T>(Command<T> command)
+        {
+            return Execute<T>((Command) command);
         }
 
         private IEnumerable<string> ReadResponses()

@@ -5,7 +5,8 @@
 
     public interface ICommandExecutor
     {
-        IEnumerable<string> Execute(ICommand command);
-        T Execute<T>(ICommand command);
+        IEnumerable<string> Execute(Command command);
+        T Execute<T>(Command command);
+        T Execute<T>(Command<T> command);
     }
 }

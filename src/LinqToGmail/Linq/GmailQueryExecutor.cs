@@ -1,17 +1,21 @@
-﻿namespace LinqToGmail.Query
+﻿namespace LinqToGmail.Linq
 {
+    using System;
     using Imap;
     using System.Collections.Generic;
     using System.Linq;
+    using Imap.Commands;
     using Remotion.Data.Linq;
     using Remotion.Data.Linq.Clauses.ResultOperators;
 
     internal class GmailQueryExecutor : IQueryExecutor
     {
+        private readonly string mailboxName;
         private readonly ICommandExecutor commandExecutor;
 
-        public GmailQueryExecutor(ICommandExecutor commandExecutor)
+        public GmailQueryExecutor(string mailboxName, ICommandExecutor commandExecutor)
         {
+            this.mailboxName = mailboxName;
             this.commandExecutor = commandExecutor;
         }
 
@@ -38,17 +42,27 @@
 
         public IEnumerable<T> ExecuteCollection<T>(QueryModel queryModel)
         {
-            var sqlVisitor = new GmailQueryModelVisitor();
-            sqlVisitor.VisitQueryModel(queryModel);
+            var visitor = new GmailQueryModelVisitor(mailboxName);
+            visitor.VisitQueryModel(queryModel);
 
-            var actions = sqlVisitor.Actions;
+            var actions = visitor.Actions;
             foreach (var action in actions)
             {
                 action(commandExecutor);
             }
 
-            //TODO: Temporary cast, will probably be removed when I'll figure out re-linq.
-            return (IEnumerable<T>) sqlVisitor.Results;
+            if (visitor.QueryState.Ids != null)
+            {
+                //TODO: Temporary cast, will probably be removed when I'll figure out re-linq.
+                var fetchAll = new FetchAll(visitor.QueryState.Ids);
+                return (IEnumerable<T>) commandExecutor.Execute(fetchAll);
+            }
+            if (visitor.QueryState.From != null && visitor.QueryState.To != null)
+            {
+                var fetchAll = new FetchAll(visitor.QueryState.From.Value, visitor.QueryState.To.Value);
+                return (IEnumerable<T>) commandExecutor.Execute(fetchAll);
+            }
+            throw new ApplicationException("Something went wrong with your LINQ query. Please report it as a bug.");
         }
 
         #endregion

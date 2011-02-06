@@ -47,8 +47,12 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Imap\CommandExecutor.cs" />
-    <Compile Include="Imap\Commands\BaseCommand.cs" />
-    <Compile Include="Ensure.cs" />
+    <Compile Include="Imap\Commands\Command.cs" />
+    <Compile Include="Imap\IMailbox.cs" />
+    <Compile Include="Imap\Parsing\UidsParser.cs" />
+    <Compile Include="Utils\Ensure.cs" />
+    <Compile Include="Imap\Commands\FetchAll.cs" />
+    <Compile Include="Imap\Commands\FetchUids.cs" />
     <Compile Include="Imap\Commands\Search.cs" />
     <Compile Include="Imap\ICommandExecutor.cs" />
     <Compile Include="Imap\IImapSslClient.cs" />
@@ -60,11 +64,11 @@
     <Compile Include="Imap\Parsing\MailboxParser.cs" />
     <Compile Include="Imap\Parsing\MessageFlagsParser.cs" />
     <Compile Include="Imap\Parsing\SingleLineParser.cs" />
-    <Compile Include="Query\GmailQueryable.cs" />
-    <Compile Include="Query\GmailQueryExecutor.cs" />
+    <Compile Include="Imap\Uid.cs" />
+    <Compile Include="Linq\GmailQueryable.cs" />
+    <Compile Include="Linq\GmailQueryExecutor.cs" />
     <Compile Include="Gmail.cs" />
     <Compile Include="Imap\Addresses.cs" />
-    <Compile Include="Imap\Commands\ICommand.cs" />
     <Compile Include="Imap\Commands\Fetch.cs" />
     <Compile Include="Imap\Commands\Login.cs" />
     <Compile Include="Imap\Commands\Logout.cs" />
@@ -75,8 +79,9 @@
     <Compile Include="Imap\MailboxMessage.cs" />
     <Compile Include="Imap\MessageFlags.cs" />
     <Compile Include="Imap\StringExtensions.cs" />
-    <Compile Include="Query\GmailQueryModelVisitor.cs" />
-    <Compile Include="Query\WhereClauseExpressionTreeVisitor.cs" />
+    <Compile Include="Linq\GmailQueryModelVisitor.cs" />
+    <Compile Include="Linq\QueryState.cs" />
+    <Compile Include="Linq\WhereExpressionVisitor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

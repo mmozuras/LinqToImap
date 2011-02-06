@@ -3,14 +3,18 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
-    public class MailboxParser : IParser<Mailbox>
+    public class MailboxParser : IParser<IMailbox>
     {
         #region IParser<Mailbox> Members
 
-        public Mailbox Parse(IEnumerable<string> input)
+        public IMailbox Parse(IEnumerable<string> input)
         {
-            var imapMailbox = new Mailbox();
+            var last = input.Last();
+            var name = Regex.Match(last, "[\\w]+(?= selected)").Groups[0].Value;
+
+            var imapMailbox = new Mailbox(name);
             var messageFlagsParser = new MessageFlagsParser();
 
             foreach (string response in input)
@@ -20,7 +24,7 @@
                 response.RegexMatch(@" FLAGS \((.*?)\)", m => { imapMailbox.Flags = messageFlagsParser.Parse(m); });
             }
 
-            if (input.Last().Contains("READ-WRITE"))
+            if (last.Contains("READ-WRITE"))
             {
                 imapMailbox.ReadableAndWritable = true;
             }

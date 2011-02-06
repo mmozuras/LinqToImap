@@ -1,9 +1,8 @@
 namespace LinqToGmail.Imap.Commands
 {
-    /// <summary>
-    /// Opens the connection.
-    /// </summary>
-    public sealed class Login : BaseCommand
+    using Utils;
+
+    public sealed class Login : Command
     {
         public Login(string username, string password)
         {
