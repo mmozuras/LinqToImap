@@ -14,5 +14,11 @@ namespace LinqToGmail.Tests.Imap.Commands
             var search = new Search(new Dictionary<string, string> {{"SUBJECT", "s"}});
             search.Text.ShouldEqual("SEARCH SUBJECT s");
         }
+
+        [Test]
+        public void Should_create_a_valid_command_from_zero_query_arguments()
+        {
+            new Search().Text.ShouldEqual("SEARCH ALL");
+        }
     }
 }

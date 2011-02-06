@@ -50,6 +50,7 @@
     <Compile Include="Imap\Commands\Command.cs" />
     <Compile Include="Imap\IMailbox.cs" />
     <Compile Include="Imap\Parsing\UidsParser.cs" />
+    <Compile Include="Imap\Uid.cs" />
     <Compile Include="Utils\Ensure.cs" />
     <Compile Include="Imap\Commands\FetchAll.cs" />
     <Compile Include="Imap\Commands\FetchUids.cs" />
@@ -64,7 +65,6 @@
     <Compile Include="Imap\Parsing\MailboxParser.cs" />
     <Compile Include="Imap\Parsing\MessageFlagsParser.cs" />
     <Compile Include="Imap\Parsing\SingleLineParser.cs" />
-    <Compile Include="Imap\Uid.cs" />
     <Compile Include="Linq\GmailQueryable.cs" />
     <Compile Include="Linq\GmailQueryExecutor.cs" />
     <Compile Include="Gmail.cs" />

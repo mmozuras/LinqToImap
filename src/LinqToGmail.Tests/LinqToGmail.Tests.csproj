@@ -62,6 +62,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Imap\CommandExecutorTests.cs" />
     <Compile Include="Imap\Parsing\IdsParserTests.cs" />
     <Compile Include="Imap\Parsing\UidsParserTests.cs" />
     <Compile Include="Utils\EnsureTests.cs" />

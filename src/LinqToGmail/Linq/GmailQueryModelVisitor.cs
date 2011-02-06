@@ -40,7 +40,9 @@
                                 if (QueryState.Ids != null)
                                 {
                                     var fetchUids = new FetchUids(QueryState.Ids);
-                                    QueryState.Uids = executor.Execute(fetchUids);
+                                    var uids = executor.Execute(fetchUids);
+
+                                    where.SearchParameters.Add("UID", string.Join(",", uids));
                                 }
                                 else if (QueryState.From.HasValue && QueryState.To.HasValue)
                                 {
@@ -48,17 +50,10 @@
                                     var fetchTo = new FetchUids(new[] {QueryState.To.Value});
 
                                     var enumerable = executor.Execute(fetchFrom);
-                                    QueryState.FromUid = enumerable.Single();
-                                    QueryState.ToUid = executor.Execute(fetchTo).Single();
-                                }
+                                    var fromUid = enumerable.Single();
+                                    var toUid = executor.Execute(fetchTo).Single();
 
-                                if (QueryState.Uids != null)
-                                {
-                                    where.SearchParameters.Add("UID", string.Join(",", QueryState.Uids));
-                                }
-                                else if (QueryState.From != null)
-                                {
-                                    where.SearchParameters.Add("UID", QueryState.FromUid + ":" + QueryState.ToUid);
+                                    where.SearchParameters.Add("UID", fromUid + ":" + toUid);
                                 }
 
                                 var search = new Search(where.SearchParameters);
@@ -66,9 +61,6 @@
 
                                 QueryState.From = null;
                                 QueryState.To = null;
-                                QueryState.FromUid = null;
-                                QueryState.ToUid = null;
-                                QueryState.Uids = null;
                             }); 
         }
 
@@ -99,10 +91,6 @@
                                     {
                                         QueryState.To = QueryState.From + count - 1;
                                     }
-
-                                    QueryState.FromUid = null;
-                                    QueryState.ToUid = null;
-                                    QueryState.Uids = null;
                                 });
             }
             else if (resultOperator is AverageResultOperator)

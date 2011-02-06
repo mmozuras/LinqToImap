@@ -20,9 +20,7 @@ namespace LinqToGmail.Tests.Imap.Parsing
         [Test]
         public void Should_parse_a_normal_message()
         {
-            var message = File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt")[0];
-
-            var mailboxMessage = parser.Parse(new[] {message});
+            var mailboxMessage = parser.Parse(new[] {GetMessage()});
 
             mailboxMessage.Id.ShouldEqual(20951);
             mailboxMessage.Flags.Answered.ShouldEqual(false);
@@ -33,10 +31,21 @@ namespace LinqToGmail.Tests.Imap.Parsing
             mailboxMessage.TimeZone.ShouldEqual("+0000");
         }
 
+        private string GetMessage()
+        {
+            return File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt")[0];
+        }
+
         [Test, ExpectedException(typeof(ArgumentException))]
         public void Should_throw_exception_if_more_than_one_line_is_passed_as_input()
         {
             parser.Parse(new[] {"1", "2"});
+        }
+
+        [Test]
+        public void Should_not_throw_an_exception_if_the_second_line_is_ok()
+        {
+            parser.Parse(new[] {GetMessage(), "kw0001 OK Success"});
         }
     }
 }

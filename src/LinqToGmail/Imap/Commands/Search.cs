@@ -5,6 +5,11 @@ namespace LinqToGmail.Imap.Commands
 
     public sealed class Search : Command<IEnumerable<int>>
     {
+        public Search()
+        {
+            Text = "SEARCH ALL";
+        }
+
         public Search(IEnumerable<KeyValuePair<string, string>> query)
         {
             Text = query.Aggregate("SEARCH ", (current, pair) => current + (pair.Key + " " + pair.Value + " ")).Trim();

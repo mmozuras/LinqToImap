@@ -13,7 +13,7 @@
 
         protected override Exception CreateUnhandledItemException<T>(T unhandledItem, string visitMethod)
         {
-            return new NotImplementedException(visitMethod + " method is not implemented");
+            return new ParserException(visitMethod + " method is not implemented");
         }
 
         protected override Expression VisitMethodCallExpression(MethodCallExpression expression)
