@@ -1,6 +1,7 @@
 namespace LinqToGmail.Tests.Imap.Commands
 {
     using LinqToGmail.Imap.Commands;
+    using LinqToGmail.Utils;
     using NUnit.Framework;
     using Should;
 
@@ -16,7 +17,7 @@ namespace LinqToGmail.Tests.Imap.Commands
         [Test]
         public void Should_create_a_valid_command_from_range_of_ids()
         {
-            new Fetch(1, 10).Text.ShouldEqual("FETCH 1:10 ALL");
+            new Fetch(new IntRange(1, 10)).Text.ShouldEqual("FETCH 1:10 ALL");
         }
 
         [Test]

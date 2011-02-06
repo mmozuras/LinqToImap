@@ -49,15 +49,15 @@
                 action(commandExecutor);
             }
 
-            if (visitor.QueryState.Ids != null)
+            if (visitor.Ids != null)
             {
                 //TODO: Temporary cast, will probably be removed when I'll figure out re-linq.
-                var fetchAll = new Fetch(visitor.QueryState.Ids);
+                var fetchAll = new Fetch(visitor.Ids);
                 return (IEnumerable<T>) commandExecutor.Execute(fetchAll);
             }
-            if (visitor.QueryState.From != null && visitor.QueryState.To != null)
+            if (visitor.Range != null)
             {
-                var fetchAll = new Fetch(visitor.QueryState.From.Value, visitor.QueryState.To.Value);
+                var fetchAll = new Fetch(visitor.Range);
                 return (IEnumerable<T>) commandExecutor.Execute(fetchAll);
             }
             throw new ApplicationException("Something went wrong with your LINQ query. Please report it as a bug.");

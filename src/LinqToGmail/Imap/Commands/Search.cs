@@ -2,6 +2,7 @@ namespace LinqToGmail.Imap.Commands
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Utils;
 
     public sealed class Search : Command<IEnumerable<int>>
     {
@@ -10,9 +11,9 @@ namespace LinqToGmail.Imap.Commands
             Text = "SEARCH ALL";
         }
 
-        public Search(int begin, int end, IEnumerable<KeyValuePair<string, string>> query)
+        public Search(IntRange range, IEnumerable<KeyValuePair<string, string>> query)
         {
-            Text = string.Format("SEARCH {0}:{1} {2}", begin, end, QueryToString(query));
+            Text = string.Format("SEARCH {0} {1}", range, QueryToString(query));
         }
 
         public Search(IEnumerable<int> ids, IEnumerable<KeyValuePair<string, string>> query)

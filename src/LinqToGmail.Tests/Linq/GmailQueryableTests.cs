@@ -6,7 +6,9 @@ namespace LinqToGmail.Tests.Linq
     using LinqToGmail.Imap;
     using LinqToGmail.Imap.Commands;
     using LinqToGmail.Linq;
+    using LinqToGmail.Utils;
     using NUnit.Framework;
+    using Should;
 
     //TODO: Current tests probably know too much about implementation
     [TestFixture]
@@ -32,7 +34,7 @@ namespace LinqToGmail.Tests.Linq
         {
             queryable.ToList();
 
-            A.CallTo(() => executor.Execute(new Fetch(1, 5)))
+            A.CallTo(() => executor.Execute(new Fetch(new IntRange(1, 5))))
                 .MustHaveHappened();
         }
 
@@ -41,7 +43,7 @@ namespace LinqToGmail.Tests.Linq
         {
             queryable.Take(20).ToList();
 
-            A.CallTo(() => executor.Execute(new Fetch(1, 20)))
+            A.CallTo(() => executor.Execute(new Fetch(new IntRange(1, 20))))
                 .MustHaveHappened();
         }
 
@@ -50,7 +52,7 @@ namespace LinqToGmail.Tests.Linq
         {
             var ids = new[] { 1, 2, 3 };
 
-            var search = new Search(1, 5, new Dictionary<string, string> {{"Subject", "an"}});
+            var search = new Search(new IntRange(1, 5), new Dictionary<string, string> {{"Subject", "an"}});
             A.CallTo(() => executor.Execute(search))
                 .Returns(ids);
 
@@ -63,7 +65,7 @@ namespace LinqToGmail.Tests.Linq
         [Test]
         public void Should_support_where_contains_and_take_together()
         {
-            var search = new Search(1, 5, new Dictionary<string, string> { { "Subject", "an" } });
+            var search = new Search(new IntRange(1, 5), new Dictionary<string, string> { { "Subject", "an" } });
             A.CallTo(() => executor.Execute(search))
                 .Returns(new[] { 1, 2, 3 });
 
@@ -78,7 +80,7 @@ namespace LinqToGmail.Tests.Linq
         {
             var ids = new[] { 1 };
 
-            var search = new Search(1, 2, new Dictionary<string, string> { { "Subject", "an" } });
+            var search = new Search(new IntRange(1, 2), new Dictionary<string, string> { { "Subject", "an" } });
             A.CallTo(() => executor.Execute(search))
                 .Returns(ids);
 

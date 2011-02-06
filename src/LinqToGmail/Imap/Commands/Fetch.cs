@@ -2,6 +2,7 @@ namespace LinqToGmail.Imap.Commands
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Utils;
 
     public sealed class Fetch : Command<IEnumerable<MailboxMessage>>
     {
@@ -10,9 +11,9 @@ namespace LinqToGmail.Imap.Commands
             Text = "FETCH 1:* ALL";
         }
 
-        public Fetch(int begin, int end)
+        public Fetch(IntRange range)
         {
-            Text = string.Format("FETCH {0}:{1} ALL", begin, end);
+            Text = string.Format("FETCH {0} ALL", range);
         }
 
         public Fetch(IEnumerable<int> ids)

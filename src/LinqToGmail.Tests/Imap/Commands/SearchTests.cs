@@ -2,6 +2,7 @@ namespace LinqToGmail.Tests.Imap.Commands
 {
     using System.Collections.Generic;
     using LinqToGmail.Imap.Commands;
+    using LinqToGmail.Utils;
     using NUnit.Framework;
     using Should;
 
@@ -24,7 +25,7 @@ namespace LinqToGmail.Tests.Imap.Commands
         [Test]
         public void Should_create_a_valid_command_from_range_of_ids()
         {
-            new Search(1, 10, new Dictionary<string, string> {{"SUBJECT", "s"}}).Text.ShouldEqual("SEARCH 1:10 SUBJECT s");
+            new Search(new IntRange(1, 10), new Dictionary<string, string> {{"SUBJECT", "s"}}).Text.ShouldEqual("SEARCH 1:10 SUBJECT s");
         }
 
         [Test]

@@ -9,23 +9,23 @@
     using Remotion.Data.Linq.Clauses;
     using Remotion.Data.Linq.Clauses.Expressions;
     using Remotion.Data.Linq.Clauses.ResultOperators;
+    using Utils;
 
     internal class GmailQueryModelVisitor : QueryModelVisitorBase
     {
         public IList<Action<ICommandExecutor>> Actions { get; private set; }
 
-        public QueryState QueryState { get; private set; }
+        public IEnumerable<int> Ids { get; private set; }
+        public IntRange Range { get; private set; }
 
         public GmailQueryModelVisitor(string mailboxName)
         {
-            QueryState = new QueryState();
             Actions = new List<Action<ICommandExecutor>>
                           {
                               executor =>
                                   {
                                       var select = new Select(mailboxName);
-                                      QueryState.To = executor.Execute(select).MessagesCount;
-                                      QueryState.From = 1;
+                                      Range = new IntRange(1, executor.Execute(select).MessagesCount);
                                   }
                           };
         }
@@ -37,21 +37,18 @@
 
             Actions.Add(executor =>
                             {
-                                if (QueryState.Ids != null)
+                                if (Ids != null)
                                 {
-                                    var search = new Search(QueryState.Ids, where.SearchParameters);
-                                    QueryState.Ids = executor.Execute(search);
+                                    var search = new Search(Ids, where.SearchParameters);
+                                    Ids = executor.Execute(search);
+                                }
+                                else if (Range != null)
+                                {
+                                    var search = new Search(Range, where.SearchParameters);
+                                    Ids = executor.Execute(search);
+                                }
 
-                                   
-                                }
-                                else if (QueryState.From.HasValue && QueryState.To.HasValue)
-                                {
-                                    var search = new Search(QueryState.From.Value, QueryState.To.Value, where.SearchParameters);
-                                    QueryState.Ids = executor.Execute(search);
-                                }
-                                
-                                QueryState.From = null;
-                                QueryState.To = null;
+                                Range = null;
                             }); 
         }
 
@@ -74,13 +71,13 @@
 
                 Actions.Add(executor =>
                                 {
-                                    if (QueryState.Ids != null)
+                                    if (Ids != null)
                                     {
-                                        QueryState.Ids = QueryState.Ids.Take(count);
+                                        Ids = Ids.Take(count);
                                     }
-                                    else if (QueryState.From != null)
+                                    else if (Range != null)
                                     {
-                                        QueryState.To = QueryState.From + count - 1;
+                                        Range = new IntRange(Range.From, Range.From + count - 1);
                                     }
                                 });
             }

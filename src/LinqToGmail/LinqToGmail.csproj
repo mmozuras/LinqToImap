@@ -76,8 +76,9 @@
     <Compile Include="Imap\MessageFlags.cs" />
     <Compile Include="Imap\StringExtensions.cs" />
     <Compile Include="Linq\GmailQueryModelVisitor.cs" />
-    <Compile Include="Linq\QueryState.cs" />
     <Compile Include="Linq\WhereExpressionVisitor.cs" />
+    <Compile Include="Utils\IntRange.cs" />
+    <Compile Include="Utils\Range.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
