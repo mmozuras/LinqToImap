@@ -39,26 +39,17 @@
                             {
                                 if (QueryState.Ids != null)
                                 {
-                                    var fetchUids = new FetchUids(QueryState.Ids);
-                                    var uids = executor.Execute(fetchUids);
+                                    var search = new Search(QueryState.Ids, where.SearchParameters);
+                                    QueryState.Ids = executor.Execute(search);
 
-                                    where.SearchParameters.Add("UID", string.Join(",", uids));
+                                   
                                 }
                                 else if (QueryState.From.HasValue && QueryState.To.HasValue)
                                 {
-                                    var fetchFrom = new FetchUids(new[] {QueryState.From.Value});
-                                    var fetchTo = new FetchUids(new[] {QueryState.To.Value});
-
-                                    var enumerable = executor.Execute(fetchFrom);
-                                    var fromUid = enumerable.Single();
-                                    var toUid = executor.Execute(fetchTo).Single();
-
-                                    where.SearchParameters.Add("UID", fromUid + ":" + toUid);
+                                    var search = new Search(QueryState.From.Value, QueryState.To.Value, where.SearchParameters);
+                                    QueryState.Ids = executor.Execute(search);
                                 }
-
-                                var search = new Search(where.SearchParameters);
-                                QueryState.Ids = executor.Execute(search);
-
+                                
                                 QueryState.From = null;
                                 QueryState.To = null;
                             }); 

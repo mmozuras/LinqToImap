@@ -38,13 +38,7 @@ namespace LinqToGmail.Tests.Imap
         [Test]
         public void Should_execute_fetch_all()
         {
-            executor.Execute(new FetchAll()).ShouldBeEmpty();
-        }
-
-        [Test]
-        public void Should_execute_fetch_uids()
-        {
-            executor.Execute(new FetchUids()).ShouldBeEmpty();
+            executor.Execute(new Fetch()).ShouldBeEmpty();
         }
 
         [Test]

@@ -49,11 +49,7 @@
     <Compile Include="Imap\CommandExecutor.cs" />
     <Compile Include="Imap\Commands\Command.cs" />
     <Compile Include="Imap\IMailbox.cs" />
-    <Compile Include="Imap\Parsing\UidsParser.cs" />
-    <Compile Include="Imap\Uid.cs" />
     <Compile Include="Utils\Ensure.cs" />
-    <Compile Include="Imap\Commands\FetchAll.cs" />
-    <Compile Include="Imap\Commands\FetchUids.cs" />
     <Compile Include="Imap\Commands\Search.cs" />
     <Compile Include="Imap\ICommandExecutor.cs" />
     <Compile Include="Imap\IImapSslClient.cs" />

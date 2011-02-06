@@ -54,12 +54,12 @@
             if (visitor.QueryState.Ids != null)
             {
                 //TODO: Temporary cast, will probably be removed when I'll figure out re-linq.
-                var fetchAll = new FetchAll(visitor.QueryState.Ids);
+                var fetchAll = new Fetch(visitor.QueryState.Ids);
                 return (IEnumerable<T>) commandExecutor.Execute(fetchAll);
             }
             if (visitor.QueryState.From != null && visitor.QueryState.To != null)
             {
-                var fetchAll = new FetchAll(visitor.QueryState.From.Value, visitor.QueryState.To.Value);
+                var fetchAll = new Fetch(visitor.QueryState.From.Value, visitor.QueryState.To.Value);
                 return (IEnumerable<T>) commandExecutor.Execute(fetchAll);
             }
             throw new ApplicationException("Something went wrong with your LINQ query. Please report it as a bug.");

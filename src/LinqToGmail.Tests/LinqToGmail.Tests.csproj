@@ -64,11 +64,9 @@
     </Compile>
     <Compile Include="Imap\CommandExecutorTests.cs" />
     <Compile Include="Imap\Parsing\IdsParserTests.cs" />
-    <Compile Include="Imap\Parsing\UidsParserTests.cs" />
     <Compile Include="Utils\EnsureTests.cs" />
     <Compile Include="Imap\Commands\CommandTests.cs" />
     <Compile Include="Imap\Commands\FetchAllTests.cs" />
-    <Compile Include="Imap\Commands\FetchUidsTests.cs" />
     <Compile Include="Imap\Commands\LoginTests.cs" />
     <Compile Include="Imap\Commands\LogoutTests.cs" />
     <Compile Include="Imap\Commands\SearchTests.cs" />
