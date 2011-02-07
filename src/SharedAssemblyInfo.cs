@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("LinqToGmail")]
+[assembly: AssemblyTitle("LinqToImap")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("LinqToGmail")]
-[assembly: AssemblyProduct("LinqToGmail")]
+[assembly: AssemblyCompany("LinqToImap")]
+[assembly: AssemblyProduct("LinqToImap")]
 [assembly: AssemblyCopyright("Copyright © Mindaugas Mozūras 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

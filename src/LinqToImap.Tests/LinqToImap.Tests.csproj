@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{839C8CDC-41FF-4986-B9BB-BCB0C668D746}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LinqToImap.Tests</RootNamespace>
+    <AssemblyName>LinqToImap.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.2.5.1\lib\NET35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FakeItEasy">
+      <HintPath>..\..\packages\FakeItEasy.1.5.3970.199\lib\FakeItEasy.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.5.7.10213\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks">
+      <HintPath>..\..\packages\NUnit.2.5.7.10213\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="pnunit.framework">
+      <HintPath>..\..\packages\NUnit.2.5.7.10213\lib\pnunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.92.1, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Remotion.Relinq.1.13.92\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Should">
+      <HintPath>..\..\packages\Should.1.1.12.0\lib\Should.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Imap\CommandExecutorTests.cs" />
+    <Compile Include="Imap\Parsing\IdsParserTests.cs" />
+    <Compile Include="Utils\EnsureTests.cs" />
+    <Compile Include="Imap\Commands\CommandTests.cs" />
+    <Compile Include="Imap\Commands\FetchAllTests.cs" />
+    <Compile Include="Imap\Commands\LoginTests.cs" />
+    <Compile Include="Imap\Commands\LogoutTests.cs" />
+    <Compile Include="Imap\Commands\SearchTests.cs" />
+    <Compile Include="Imap\Commands\SelectTests.cs" />
+    <Compile Include="Imap\Parsing\AddressesParserTests.cs" />
+    <Compile Include="Imap\Parsing\MailboxMessageParserTests.cs" />
+    <Compile Include="Imap\Parsing\MailboxMessagesParserTests.cs" />
+    <Compile Include="Imap\Parsing\MailboxParserTests.cs" />
+    <Compile Include="Imap\Parsing\MessageFlagsParserTests.cs" />
+    <Compile Include="Linq\ImapQueryableTests.cs" />
+    <Compile Include="Utils\IntRangeTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LinqToImap\LinqToImap.csproj">
+      <Project>{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}</Project>
+      <Name>LinqToGmail</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Imap\Parsing\mailboxMessage.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imap\Parsing\addresses.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

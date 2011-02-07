@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToImap", "src\LinqToImap\LinqToImap.csproj", "{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToImap.Tests", "src\LinqToImap.Tests\LinqToImap.Tests.csproj", "{839C8CDC-41FF-4986-B9BB-BCB0C668D746}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{13AB5BCD-0D92-446D-B8DD-8F5AADE9454F}.Release|x86.ActiveCfg = Release|Any CPU
+		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{839C8CDC-41FF-4986-B9BB-BCB0C668D746}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
