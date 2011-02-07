@@ -49,10 +49,11 @@
     <Compile Include="Imap\CommandExecutor.cs" />
     <Compile Include="Imap\Commands\Command.cs" />
     <Compile Include="Imap\IMailbox.cs" />
+    <Compile Include="Mail.cs" />
     <Compile Include="Utils\Ensure.cs" />
     <Compile Include="Imap\Commands\Search.cs" />
     <Compile Include="Imap\ICommandExecutor.cs" />
-    <Compile Include="Imap\IImapSslClient.cs" />
+    <Compile Include="Imap\IImapClient.cs" />
     <Compile Include="Imap\Parsing\AddressesParser.cs" />
     <Compile Include="Imap\Parsing\IdsParser.cs" />
     <Compile Include="Imap\Parsing\IParser.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Linq\WhereExpressionVisitor.cs" />
     <Compile Include="Utils\IntRange.cs" />
     <Compile Include="Utils\Range.cs" />
+    <Compile Include="YahooMail.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,7 +15,7 @@
             string message = File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt")[0];
 
             var parser = new MailboxMessagesParser();
-            var mailboxMessages = parser.Parse(new[] {message});
+            var mailboxMessages = parser.Parse(null, new[] {message});
 
             mailboxMessages.Count().ShouldEqual(1);
         }

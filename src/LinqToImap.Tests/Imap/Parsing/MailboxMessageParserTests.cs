@@ -26,13 +26,13 @@ namespace LinqToImap.Tests.Imap.Parsing
         [Test]
         public void Should_not_throw_an_exception_if_the_second_line_is_ok()
         {
-            parser.Parse(new[] {GetMessage(), "kw0001 OK Success"});
+            parser.Parse(null, new[] {GetMessage(), "kw0001 OK Success"});
         }
 
         [Test]
         public void Should_parse_a_normal_message()
         {
-            MailboxMessage mailboxMessage = parser.Parse(new[] {GetMessage()});
+            MailboxMessage mailboxMessage = parser.Parse(null, new[] {GetMessage()});
 
             mailboxMessage.Id.ShouldEqual(20951);
             mailboxMessage.Flags.Answered.ShouldEqual(false);
@@ -46,7 +46,7 @@ namespace LinqToImap.Tests.Imap.Parsing
         [Test, ExpectedException(typeof (ArgumentException))]
         public void Should_throw_exception_if_more_than_one_line_is_passed_as_input()
         {
-            parser.Parse(new[] {"1", "2"});
+            parser.Parse(null, new[] {"1", "2"});
         }
     }
 }

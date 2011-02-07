@@ -3,10 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Commands;
 
     public abstract class SingleLineParser<T> : IParser<T>
     {
-        public T Parse(IEnumerable<string> input)
+        public T Parse(Command command, IEnumerable<string> input)
         {
             if (input.Count() == 1)
             {

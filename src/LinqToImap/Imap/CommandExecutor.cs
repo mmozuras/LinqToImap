@@ -9,11 +9,11 @@
 
     public class CommandExecutor : ICommandExecutor
     {
-        private readonly IImapSslClient imapSslClient;
+        private readonly IImapClient imapClient;
 
-        public CommandExecutor(IImapSslClient imapSslClient)
+        public CommandExecutor(IImapClient imapClient)
         {
-            this.imapSslClient = imapSslClient;
+            this.imapClient = imapClient;
         
             Current = this;
         }
@@ -23,7 +23,7 @@
 
         public IEnumerable<string> Execute(Command command)
         {
-            imapSslClient.Write(command.Text);
+            imapClient.Write(command.Text);
             var responses = ReadResponses().ToList();
 
             if (!responses.Last().IsOk())
@@ -52,7 +52,7 @@
             }
 
             var parser = (IParser<T>)Activator.CreateInstance(parserType);
-            return parser.Parse(responses);
+            return parser.Parse(command, responses);
         }
 
         public T Execute<T>(Command<T> command)
@@ -65,7 +65,7 @@
             string response;
             do
             {
-                response = imapSslClient.Read();
+                response = imapClient.Read();
                 yield return response;
             } while (response.HasInfo());
         }

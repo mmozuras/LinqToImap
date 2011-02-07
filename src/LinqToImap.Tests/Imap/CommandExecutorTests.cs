@@ -10,17 +10,17 @@ namespace LinqToImap.Tests.Imap
     public class CommandExecutorTests
     {
         private CommandExecutor executor;
-        private IImapSslClient imapSslClient;
+        private IImapClient imapClient;
 
         [SetUp]
         public void SetUp()
         {
-            imapSslClient = A.Fake<IImapSslClient>();
+            imapClient = A.Fake<IImapClient>();
 
-            A.CallTo(() => imapSslClient.Read())
+            A.CallTo(() => imapClient.Read())
                 .Returns("kw0001 OK Success");
 
-            executor = new CommandExecutor(imapSslClient);
+            executor = new CommandExecutor(imapClient);
         }
 
         [Test]

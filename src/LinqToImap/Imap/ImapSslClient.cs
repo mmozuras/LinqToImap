@@ -6,7 +6,7 @@ namespace LinqToImap.Imap
     using System.Net.Sockets;
     using System.Text;
 
-    public class ImapSslClient : IImapSslClient
+    public class ImapSslClient : IImapClient
     {
         private readonly SslStream sslStream;
         private readonly StreamReader streamReader;
@@ -38,9 +38,6 @@ namespace LinqToImap.Imap
         {
             string tagNumber = (tag++).ToString("D4");
             string taggedMessage = string.Format("kw{0} {1}{2}", tagNumber, message, Environment.NewLine);
-
-            Console.WriteLine(taggedMessage);
-
             byte[] command = Encoding.ASCII.GetBytes(taggedMessage);
             sslStream.Write(command, 0, command.Length);
         }

@@ -1,5 +1,6 @@
 ﻿namespace LinqToImap.Tests.Imap.Parsing
 {
+    using LinqToImap.Imap.Commands;
     using LinqToImap.Imap.Parsing;
     using NUnit.Framework;
     using Should;
@@ -21,9 +22,8 @@
                                 @"a03 OK [READ-WRITE] Inbox selected. (Success)",
                             };
             var parser = new MailboxParser();
-            var mailbox = parser.Parse(input);
+            var mailbox = parser.Parse(new Select("Inbox"), input);
 
-            mailbox.Name.ShouldEqual("Inbox");
             mailbox.Flags.Answered.ShouldEqual(true);
             mailbox.MessagesCount.ShouldEqual(1242);
             mailbox.RecentMessagesCount.ShouldEqual(5);

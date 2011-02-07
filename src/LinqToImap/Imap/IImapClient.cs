@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface IImapSslClient : IDisposable
+    public interface IImapClient : IDisposable
     {
         void Write(string message);
         string Read();
