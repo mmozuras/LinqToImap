@@ -8,6 +8,7 @@ namespace LinqToImap.Tests.Linq
     using LinqToImap.Linq;
     using LinqToImap.Utils;
     using NUnit.Framework;
+    using Should;
 
     //TODO: Current tests probably know too much about implementation
     [TestFixture]
@@ -111,6 +112,22 @@ namespace LinqToImap.Tests.Linq
 
             A.CallTo(() => executor.Execute(new Fetch(new[] {1, 2})))
                 .MustHaveHappened();
+        }
+
+        [Test]
+        public void Should_support_count()
+        {
+            queryable.Count().ShouldEqual(5);
+        }
+
+        [Test]
+        public void Should_support_count_after_a_predicate()
+        {
+            var search = new Search(new IntRange(1, 5), new Dictionary<string, string> { { "Subject", "an" } });
+            A.CallTo(() => executor.Execute(search))
+                .Returns(new[] { 1, 2, 3 });
+
+            queryable.Where(x => x.Subject.Contains("an")).Count().ShouldEqual(3);
         }
     }
 }

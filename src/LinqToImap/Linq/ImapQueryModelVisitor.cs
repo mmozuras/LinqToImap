@@ -17,6 +17,7 @@
 
         public IEnumerable<int> Ids { get; private set; }
         public IntRange Range { get; private set; }
+        public object Result { get; private set; }
 
         public ImapQueryModelVisitor(string mailboxName)
         {
@@ -111,18 +112,22 @@
                                     }
                                 });
             }
-            else if (resultOperator is AverageResultOperator)
-                throw new NotSupportedException("LinqToImap does not provide support for the Average() method");
             else if (resultOperator is CountResultOperator)
-                throw new NotSupportedException("LinqToImap does not provide support for the Count() method");
+            {
+                Actions.Add(executor =>
+                                {
+                                    if (Ids != null)
+                                    {
+                                        Result = Ids.Count();
+                                    }
+                                    else if (Range != null)
+                                    {
+                                        Result = Range.To - Range.From + 1;
+                                    }
+                                });
+            }
             else if (resultOperator is LongCountResultOperator)
                 throw new NotSupportedException("LinqToImap does not provide support for the LongCount() method");
-            else if (resultOperator is MaxResultOperator)
-                throw new NotSupportedException("LinqToImap does not provide support for the Max() method");
-            else if (resultOperator is MinResultOperator)
-                throw new NotSupportedException("LinqToImap does not provide support for the Min() method");
-            else if (resultOperator is SumResultOperator)
-                throw new NotSupportedException("LinqToImap does not provide support for the Sum() method");
             else if (resultOperator is ContainsResultOperator)
                 throw new NotSupportedException("LinqToImap does not provide support for the Contains() method");
             else if (resultOperator is DefaultIfEmptyResultOperator)
@@ -131,16 +136,25 @@
                 throw new NotSupportedException("LinqToImap does not provide support for the Distinct() method");
             else if (resultOperator is ExceptResultOperator)
                 throw new NotSupportedException("LinqToImap does not provide support for the Except() method");
-            else if (resultOperator is GroupResultOperator)
-                throw new NotSupportedException("LinqToImap does not provide support for the Group() method");
             else if (resultOperator is IntersectResultOperator)
                 throw new NotSupportedException("LinqToImap does not provide support for the Intersect() method");
-            else if (resultOperator is OfTypeResultOperator)
-                throw new NotSupportedException("LinqToImap does not provide support for the OfType() method");
             else if (resultOperator is SingleResultOperator)
                 throw new NotSupportedException("LinqToImap does not provide support for the Single() method. Use the First() method instead");
             else if (resultOperator is UnionResultOperator)
                 throw new NotSupportedException("LinqToImap does not provide support for the Union() method");
+
+            else if (resultOperator is AverageResultOperator)
+                throw new NotSupportedException("LinqToImap does not provide support for the Average() method");
+            else if (resultOperator is MaxResultOperator)
+                throw new NotSupportedException("LinqToImap does not provide support for the Max() method");
+            else if (resultOperator is MinResultOperator)
+                throw new NotSupportedException("LinqToImap does not provide support for the Min() method");
+            else if (resultOperator is SumResultOperator)
+                throw new NotSupportedException("LinqToImap does not provide support for the Sum() method");
+            else if (resultOperator is GroupResultOperator)
+                throw new NotSupportedException("LinqToImap does not provide support for the Group() method");
+            else if (resultOperator is OfTypeResultOperator)
+                throw new NotSupportedException("LinqToImap does not provide support for the OfType() method");
 
             base.VisitResultOperator(resultOperator, queryModel, index);
         }

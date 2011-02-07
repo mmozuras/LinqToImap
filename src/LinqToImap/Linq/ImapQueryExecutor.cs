@@ -49,6 +49,10 @@
                 action(commandExecutor);
             }
 
+            if (visitor.Result != null)
+            {
+                return new List<T> {(T) visitor.Result};
+            }
             if (visitor.Ids != null)
             {
                 //TODO: Temporary cast, will probably be removed when I'll figure out re-linq.
