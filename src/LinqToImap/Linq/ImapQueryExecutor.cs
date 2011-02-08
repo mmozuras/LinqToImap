@@ -40,28 +40,29 @@
 
         public IEnumerable<T> ExecuteCollection<T>(QueryModel queryModel)
         {
-            var visitor = new ImapQueryModelVisitor(mailboxName);
+            var visitor = new ImapQueryModelVisitor(commandExecutor, mailboxName);
             visitor.VisitQueryModel(queryModel);
 
             var actions = visitor.Actions;
+            var queryState = new QueryState();
             foreach (var action in actions)
             {
-                action(commandExecutor);
+                action(queryState);
             }
 
-            if (visitor.Result != null)
+            if (queryState.Result != null)
             {
-                return new List<T> {(T) visitor.Result};
+                return new List<T> { (T)queryState.Result };
             }
-            if (visitor.Ids != null)
+            if (queryState.Ids != null)
             {
                 //TODO: Temporary cast, will probably be removed when I'll figure out re-linq.
-                var fetchAll = new Fetch(visitor.Ids);
+                var fetchAll = new Fetch(queryState.Ids);
                 return (IEnumerable<T>) commandExecutor.Execute(fetchAll);
             }
-            if (visitor.Range != null)
+            if (queryState.Range != null)
             {
-                var fetchAll = new Fetch(visitor.Range);
+                var fetchAll = new Fetch(queryState.Range);
                 return (IEnumerable<T>) commandExecutor.Execute(fetchAll);
             }
             throw new ApplicationException("Something went wrong with your LINQ query. Please report it as a bug.");

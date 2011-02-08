@@ -10,7 +10,7 @@ namespace LinqToImap.Tests.Linq
     using NUnit.Framework;
     using Should;
 
-    //TODO: Current tests probably know too much about implementation
+   
     [TestFixture]
     public class ImapQueryableTests
     {
@@ -22,8 +22,19 @@ namespace LinqToImap.Tests.Linq
             queryable = new ImapQueryable<MailboxMessage>("Inbox", executor);
 
             var mailbox = A.Fake<IMailbox>();
+
+            //TODO: Current tests probably know too much about implementation
             A.CallTo(() => mailbox.MessagesCount).Returns(5);
             A.CallTo(() => executor.Execute(new Select("Inbox"))).Returns(mailbox);
+
+            var search = new Search(new IntRange(1, 5), new Dictionary<string, string> { { "Subject", "an" } });
+            A.CallTo(() => executor.Execute(search))
+                .Returns(new[] { 1, 2, 3 });
+
+            A.CallTo(() => executor.Execute(new Fetch(new[] { 1 })))
+               .Returns(new List<MailboxMessage> { null });
+            A.CallTo(() => executor.Execute(new Fetch(new[] { 5 })))
+                .Returns(new List<MailboxMessage> { null });
         }
 
         private ImapQueryable<MailboxMessage> queryable;
@@ -32,9 +43,6 @@ namespace LinqToImap.Tests.Linq
         [Test]
         public void Should_support_first()
         {
-            A.CallTo(() => executor.Execute(new Fetch(new[] {1})))
-                .Returns(new List<MailboxMessage> {null});
-
             queryable.First();
 
             A.CallTo(() => executor.Execute(new Fetch(new[] {1})))
@@ -44,9 +52,6 @@ namespace LinqToImap.Tests.Linq
         [Test]
         public void Should_support_last()
         {
-            A.CallTo(() => executor.Execute(new Fetch(new[] {5})))
-                .Returns(new List<MailboxMessage> {null});
-
             queryable.Last();
 
             A.CallTo(() => executor.Execute(new Fetch(new[] {5})))
@@ -89,25 +94,15 @@ namespace LinqToImap.Tests.Linq
         [Test]
         public void Should_support_where_contains()
         {
-            var ids = new[] {1, 2, 3};
-
-            var search = new Search(new IntRange(1, 5), new Dictionary<string, string> {{"Subject", "an"}});
-            A.CallTo(() => executor.Execute(search))
-                .Returns(ids);
-
             queryable.Where(x => x.Subject.Contains("an")).ToList();
 
-            A.CallTo(() => executor.Execute(new Fetch(ids)))
+            A.CallTo(() => executor.Execute(new Fetch(new[] {1, 2, 3})))
                 .MustHaveHappened();
         }
 
         [Test]
         public void Should_support_where_contains_and_take_together()
         {
-            var search = new Search(new IntRange(1, 5), new Dictionary<string, string> {{"Subject", "an"}});
-            A.CallTo(() => executor.Execute(search))
-                .Returns(new[] {1, 2, 3});
-
             queryable.Where(x => x.Subject.Contains("an")).Take(2).ToList();
 
             A.CallTo(() => executor.Execute(new Fetch(new[] {1, 2})))
@@ -123,10 +118,6 @@ namespace LinqToImap.Tests.Linq
         [Test]
         public void Should_support_count_after_a_predicate()
         {
-            var search = new Search(new IntRange(1, 5), new Dictionary<string, string> { { "Subject", "an" } });
-            A.CallTo(() => executor.Execute(search))
-                .Returns(new[] { 1, 2, 3 });
-
             queryable.Where(x => x.Subject.Contains("an")).Count().ShouldEqual(3);
         }
     }

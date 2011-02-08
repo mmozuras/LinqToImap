@@ -35,7 +35,8 @@ namespace LinqToImap.Tests.Imap.Parsing
             MailboxMessage mailboxMessage = parser.Parse(null, new[] {GetMessage()});
 
             mailboxMessage.Id.ShouldEqual(20951);
-            mailboxMessage.Flags.Answered.ShouldEqual(false);
+            mailboxMessage.Flags.Answered.ShouldBeFalse();
+            mailboxMessage.Flags.Seen.ShouldBeTrue();
             mailboxMessage.Subject.ShouldEqual("Subject");
             mailboxMessage.Addresses.From.Address.ShouldEqual("John.Doe@mail.com");
             mailboxMessage.Received.ShouldEqual(DateTime.Parse("2011.01.28 11:55:59"));

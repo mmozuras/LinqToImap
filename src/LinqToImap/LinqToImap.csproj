@@ -49,6 +49,8 @@
     <Compile Include="Imap\CommandExecutor.cs" />
     <Compile Include="Imap\Commands\Command.cs" />
     <Compile Include="Imap\IMailbox.cs" />
+    <Compile Include="Linq\QueryState.cs" />
+    <Compile Include="Linq\ResultOperatorVisitor.cs" />
     <Compile Include="Mail.cs" />
     <Compile Include="Utils\Ensure.cs" />
     <Compile Include="Imap\Commands\Search.cs" />

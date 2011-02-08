@@ -29,8 +29,6 @@
             string subject = input.Substring(0, input.IndexOf("(("));
             subject.Trim().RegexMatch("^\"(.*)\"$", m => { mailboxMessage.Subject = QuotedPrintableDecoder.Decode(m); });
 
-            input.Remove(0, subject.Length).RegexMatch(@"""<([^>]+)>""", m => { mailboxMessage.ReferenceId = m; });
-
             var addressesParser = new AddressesParser();
             mailboxMessage.Addresses = addressesParser.Parse(input);
 

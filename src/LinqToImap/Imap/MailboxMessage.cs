@@ -9,7 +9,6 @@ namespace LinqToImap.Imap
         }
 
         public int Id { get; internal set; }
-        public string ReferenceId { get; internal set; }
 
         public string Subject { get; internal set; }
 
