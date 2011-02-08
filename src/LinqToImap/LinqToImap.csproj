@@ -80,6 +80,7 @@
     <Compile Include="Imap\StringExtensions.cs" />
     <Compile Include="Linq\ImapQueryModelVisitor.cs" />
     <Compile Include="Linq\WhereExpressionVisitor.cs" />
+    <Compile Include="Utils\IntExtensions.cs" />
     <Compile Include="Utils\IntRange.cs" />
     <Compile Include="Utils\Range.cs" />
     <Compile Include="YahooMail.cs" />

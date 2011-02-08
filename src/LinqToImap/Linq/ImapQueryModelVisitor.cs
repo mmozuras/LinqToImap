@@ -22,7 +22,7 @@
                               queryState =>
                                   {
                                       var select = new Select(mailboxName);
-                                      queryState.Range = new IntRange(1, commandExecutor.Execute(select).MessagesCount);
+                                      queryState.Range = 1.To(commandExecutor.Execute(select).MessagesCount);
                                   }
                           };
         }
@@ -33,8 +33,8 @@
             where.VisitExpression(whereClause.Predicate);
 
             Actions.Add(queryState => queryState.Apply(
-                q => commandExecutor.Execute(new Search(q.Ids, where.SearchParameters)),
-                q => commandExecutor.Execute(new Search(queryState.Range, where.SearchParameters))));
+                q => commandExecutor.Execute(new Search(q.Ids, where.Query)),
+                q => commandExecutor.Execute(new Search(queryState.Range, where.Query))));
         }
 
         public override void VisitMainFromClause(MainFromClause fromClause, QueryModel queryModel)

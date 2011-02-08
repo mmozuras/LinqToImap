@@ -11,9 +11,10 @@ namespace LinqToImap.Tests.Imap.Commands
     public class FetchTests
     {
         [Test]
-        public void Should_create_a_command_that_fetches_all_messages_from_empty_collection()
+        public void Should_create_a_command_that_fetches_nothing_from_empty_collection()
         {
-            new Fetch(new int[] {}).Text.ShouldEqual("FETCH 1:* ALL");
+            //TODO: Figure out if there's a better way to fetch nothing, instead of using max value.
+            new Fetch(new int[] { }).Text.ShouldEqual("FETCH 4294967295 ALL");
         }
 
         [Test]
@@ -31,7 +32,13 @@ namespace LinqToImap.Tests.Imap.Commands
         [Test]
         public void Should_create_a_valid_command_from_range_of_ids()
         {
-            new Fetch(new IntRange(1, 10)).Text.ShouldEqual("FETCH 1:10 ALL");
+            new Fetch(1.To(10)).Text.ShouldEqual("FETCH 1:10 ALL");
+        }
+
+        [Test]
+        public void Should_create_a_valid_command_from_one_id()
+        {
+            new Fetch(3).Text.ShouldEqual("FETCH 3 ALL");
         }
 
         [Test, ExpectedException(typeof (ArgumentNullException))]

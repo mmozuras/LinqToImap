@@ -1,15 +1,18 @@
 ﻿namespace LinqToImap.Linq
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using Remotion.Data.Linq.Parsing;
 
     public class WhereExpressionVisitor : ThrowingExpressionTreeVisitor
     {
-        private string name;
-        public IDictionary<string, string> SearchParameters { get; private set; }
+        public string Query { get; private set; }
+
+        public WhereExpressionVisitor()
+        {
+            Query = string.Empty;
+        }
 
         protected override Exception CreateUnhandledItemException<T>(T unhandledItem, string visitMethod)
         {
@@ -23,14 +26,33 @@
                 VisitExpression(expression.Object);
 
                 var value = expression.Arguments.First().ToString().Replace("\"", string.Empty);
-                SearchParameters = new Dictionary<string, string> {{name, value}};
+                Query += " " + value;
             }
             return expression;
         }
 
+        protected override Expression VisitUnaryExpression(UnaryExpression expression)
+        {
+            if (expression.NodeType == ExpressionType.Not)
+            {
+                Query += "Not ";
+                return VisitMemberExpression(expression.Operand as MemberExpression);
+            }
+            throw new NotSupportedException();
+        }
+
         protected override Expression VisitMemberExpression(MemberExpression expression)
         {
-            name = expression.Member.Name;
+            var supportedKeywords = new[] {"Seen", "Deleted", "Draft", "Answered", "Flagged", "Recent", "Subject"};
+
+            var name = expression.Member.Name;
+
+            if (!supportedKeywords.Contains(name))
+            {
+                throw new NotSupportedException();
+            }
+
+            Query += name;
             return expression;
         }
     }

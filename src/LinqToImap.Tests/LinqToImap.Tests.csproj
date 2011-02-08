@@ -66,9 +66,10 @@
     </Compile>
     <Compile Include="Imap\CommandExecutorTests.cs" />
     <Compile Include="Imap\Parsing\IdsParserTests.cs" />
+    <Compile Include="Linq\CommandExtensions.cs" />
     <Compile Include="Utils\EnsureTests.cs" />
     <Compile Include="Imap\Commands\CommandTests.cs" />
-    <Compile Include="Imap\Commands\FetchAllTests.cs" />
+    <Compile Include="Imap\Commands\FetchTests.cs" />
     <Compile Include="Imap\Commands\LoginTests.cs" />
     <Compile Include="Imap\Commands\LogoutTests.cs" />
     <Compile Include="Imap\Commands\SearchTests.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Imap\Parsing\MailboxParserTests.cs" />
     <Compile Include="Imap\Parsing\MessageFlagsParserTests.cs" />
     <Compile Include="Linq\ImapQueryableTests.cs" />
+    <Compile Include="Utils\IntExtensionsTests.cs" />
     <Compile Include="Utils\IntRangeTests.cs" />
   </ItemGroup>
   <ItemGroup>

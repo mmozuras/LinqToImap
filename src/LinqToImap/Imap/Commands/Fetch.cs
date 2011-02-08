@@ -26,8 +26,13 @@ namespace LinqToImap.Imap.Commands
             }
             else
             {
-                Text = "FETCH 1:* ALL";
+                Text = "FETCH 4294967295 ALL";
             }
+        }
+
+        public Fetch(int id) : this(new[]{id})
+        {
+            
         }
 
         public override string Text { get; protected set; }
