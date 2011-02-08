@@ -31,6 +31,24 @@
             return expression;
         }
 
+        protected override Expression VisitBinaryExpression(BinaryExpression expression)
+        {
+            VisitExpression(expression.Left);
+
+            switch (expression.NodeType)
+            {
+                case ExpressionType.AndAlso:
+                    Query += " ";
+                    break;
+                default:
+                    throw new NotSupportedException(string.Format("{0} statement is not supported", expression.NodeType));
+            }
+
+            VisitExpression(expression.Right);
+
+            return expression;
+        }
+
         protected override Expression VisitUnaryExpression(UnaryExpression expression)
         {
             if (expression.NodeType == ExpressionType.Not)

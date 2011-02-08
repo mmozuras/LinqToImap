@@ -107,6 +107,16 @@ namespace LinqToImap.Tests.Linq
         }
 
         [Test]
+        public void Should_support_and()
+        {
+            new Search(1.To(5), "Answered Subject an").Returns(new[] { 1, 2 });
+
+            queryable.Where(x => x.Flags.Answered && x.Subject.Contains("an")).ToList();
+
+            new Fetch(new[] {1, 2}).MustHaveHappened();
+        }
+
+        [Test]
         public void Should_support_where_contains()
         {
             queryable.Where(x => x.Subject.Contains("an")).ToList();
