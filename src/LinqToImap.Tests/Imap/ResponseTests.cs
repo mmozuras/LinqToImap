@@ -1,6 +1,7 @@
 namespace LinqToImap.Tests.Imap
 {
     using System.Linq;
+    using FakeItEasy;
     using LinqToImap.Imap;
     using NUnit.Framework;
     using Should;
@@ -26,6 +27,18 @@ namespace LinqToImap.Tests.Imap
             var response = new Response(new[] {"* Data", "li0001 OK"});
             response.Data.First().ShouldEqual("* Data");
             response.Status.ShouldEqual("li0001 OK");
+        }
+
+        [Test]
+        public void Should_read_until_tagged_line()
+        {
+            var imapClient = A.Fake<IImapClient>();
+            A.CallTo(() => imapClient.Read())
+                .ReturnsNextFromSequence(new[] {"* OK", "* BAD", "*BYE", "OK", "li0001 OK"});
+
+            var response = Response.ReadFrom(imapClient);
+
+            response.Data.Count().ShouldEqual(4);
         }
     }
 }

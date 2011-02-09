@@ -5,6 +5,10 @@ namespace LinqToImap.Imap.Commands
 
     public sealed class Search : Command<IEnumerable<int>>
     {
+        //TODO: Validate query
+        //Supported keywords: 
+        // var supportedKeywords = new[] {"Seen", "Deleted", "Draft", "Answered", "Flagged", "Recent", "Subject"};
+
         public Search() : this("ALL")
         {
         }

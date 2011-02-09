@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     public class Response
     {
@@ -14,7 +15,7 @@
                 throw new ImapException(lines);
             }
 
-            Data = lines.Where(HasData);
+            Data = lines.Except(new[] {status});
             Status = status;
         }
 
@@ -34,7 +35,7 @@
             {
                 response = imapClient.Read();
                 yield return response;
-            } while (HasData(response));
+            } while (!IsTagged(response));
         }
 
         private static bool IsOk(string line)
@@ -42,9 +43,9 @@
             return line.StartsWith("* OK") || (line.Length > 7 && line.Substring(7, 2) == "OK");
         }
 
-        private static bool HasData(string response)
+        private static bool IsTagged(string response)
         {
-            return response.StartsWith("*");
+            return Regex.IsMatch(response, "li\\d+.*");
         }
     }
 }

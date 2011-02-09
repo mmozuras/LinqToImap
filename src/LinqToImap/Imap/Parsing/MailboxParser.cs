@@ -10,7 +10,7 @@
         {
             var name = command.Text.Split().Last();
 
-            var imapMailbox = new Mailbox(name);
+            var imapMailbox = new Mailbox(name, CommandExecutor.Current);
             var messageFlagsParser = new MessageFlagsParser();
 
             foreach (string line in response.Data)

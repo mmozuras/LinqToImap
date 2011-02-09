@@ -9,11 +9,11 @@ namespace LinqToImap.Imap
 
     public class Mailbox : IMailbox
     {
-        public Mailbox(string name)
+        public Mailbox(string name, ICommandExecutor commandExecutor)
         {
             Name = name;
             Flags = new MessageFlags();
-            Messages = new ImapQueryable<MailboxMessage>(name, CommandExecutor.Current);
+            Messages = new ImapQueryable<MailboxMessage>(name, commandExecutor);
         }
 
         public string Name { get; private set; }

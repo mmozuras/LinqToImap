@@ -61,16 +61,7 @@
 
         protected override Expression VisitMemberExpression(MemberExpression expression)
         {
-            var supportedKeywords = new[] {"Seen", "Deleted", "Draft", "Answered", "Flagged", "Recent", "Subject"};
-
-            var name = expression.Member.Name;
-
-            if (!supportedKeywords.Contains(name))
-            {
-                throw new NotSupportedException();
-            }
-
-            Query += name;
+            Query += expression.Member.Name;
             return expression;
         }
     }

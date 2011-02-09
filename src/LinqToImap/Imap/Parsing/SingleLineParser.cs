@@ -8,10 +8,9 @@
     {
         public T Parse(Command command, Response response)
         {
-            var line = response.Data.SingleOrDefault();
-            if (line != null)
+            if (response.Data.Count() == 1)
             {
-                return Parse(line);
+                return Parse(response.Data.Single());
             }
             throw new ArgumentException(GetType().Name + " can only parse a single line.", "response");
         }
