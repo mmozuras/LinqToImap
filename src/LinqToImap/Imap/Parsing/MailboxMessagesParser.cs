@@ -6,13 +6,10 @@ namespace LinqToImap.Imap.Parsing
 
     public class MailboxMessagesParser : IParser<IEnumerable<MailboxMessage>>
     {
-        public IEnumerable<MailboxMessage> Parse(Command command, IEnumerable<string> input)
+        public IEnumerable<MailboxMessage> Parse(Command command, Response response)
         {
-            return (from response in input
-                    where response.HasInfo()
-                    let messageParser = new MailboxMessageParser()
-                    let mailboxMessage = messageParser.Parse(response)
-                    select mailboxMessage).ToList();
+            var messageParser = new MailboxMessageParser();
+            return response.Data.Select(messageParser.Parse).ToList();
         }
     }
 }

@@ -49,6 +49,8 @@
     <Compile Include="Imap\CommandExecutor.cs" />
     <Compile Include="Imap\Commands\Command.cs" />
     <Compile Include="Imap\IMailbox.cs" />
+    <Compile Include="Imap\ImapException.cs" />
+    <Compile Include="Imap\Response.cs" />
     <Compile Include="Linq\QueryState.cs" />
     <Compile Include="Linq\ResultOperatorVisitor.cs" />
     <Compile Include="Mail.cs" />
@@ -77,7 +79,7 @@
     <Compile Include="Imap\Mailbox.cs" />
     <Compile Include="Imap\MailboxMessage.cs" />
     <Compile Include="Imap\MessageFlags.cs" />
-    <Compile Include="Imap\StringExtensions.cs" />
+    <Compile Include="Imap\Parsing\RegexExtensions.cs" />
     <Compile Include="Linq\ImapQueryModelVisitor.cs" />
     <Compile Include="Linq\WhereExpressionVisitor.cs" />
     <Compile Include="Utils\IntExtensions.cs" />

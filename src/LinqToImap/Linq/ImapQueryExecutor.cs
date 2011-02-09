@@ -50,10 +50,6 @@
                 action(queryState);
             }
 
-            if (queryState.Result != null)
-            {
-                return new List<T> { (T)queryState.Result };
-            }
             if (queryState.Ids != null)
             {
                 //TODO: Temporary cast, will probably be removed when I'll figure out re-linq.
@@ -65,7 +61,7 @@
                 var fetchAll = new Fetch(queryState.Range);
                 return (IEnumerable<T>) commandExecutor.Execute(fetchAll);
             }
-            throw new ApplicationException("Something went wrong with your LINQ query. Please report it as a bug.");
+            return new List<T> { (T)queryState.Result };
         }
     }
 }

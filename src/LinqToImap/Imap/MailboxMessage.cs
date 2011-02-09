@@ -20,10 +20,5 @@ namespace LinqToImap.Imap
         public string TimeZone { get; set; }
 
         public int Size { get; internal set; }
-
-        public override string ToString()
-        {
-            return Subject;
-        }
     }
 }

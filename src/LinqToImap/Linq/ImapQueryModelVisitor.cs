@@ -49,7 +49,7 @@
 
         public override void VisitResultOperator(ResultOperatorBase resultOperator, QueryModel queryModel, int index)
         {
-            var resultOperatorVisitor = new ResultOperatorVisitor(commandExecutor);
+            var resultOperatorVisitor = new ResultOperatorVisitor();
             var action = resultOperatorVisitor.Visit(resultOperator, index);
             Actions.Add(action);
 

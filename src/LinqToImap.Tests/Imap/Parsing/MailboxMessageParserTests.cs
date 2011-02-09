@@ -1,6 +1,7 @@
 namespace LinqToImap.Tests.Imap.Parsing
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using LinqToImap.Imap;
     using LinqToImap.Imap.Parsing;
@@ -18,21 +19,21 @@ namespace LinqToImap.Tests.Imap.Parsing
 
         private MailboxMessageParser parser;
 
-        private static string GetMessage()
+        private static IEnumerable<string> GetMessage()
         {
-            return File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt")[0];
+            return File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt");
         }
 
         [Test]
         public void Should_not_throw_an_exception_if_the_second_line_is_ok()
         {
-            parser.Parse(null, new[] {GetMessage(), "kw0001 OK Success"});
+            parser.Parse(null, new Response(GetMessage()));
         }
 
         [Test]
         public void Should_parse_a_normal_message()
         {
-            MailboxMessage mailboxMessage = parser.Parse(null, new[] {GetMessage()});
+            MailboxMessage mailboxMessage = parser.Parse(null, new Response(GetMessage()));
 
             mailboxMessage.Id.ShouldEqual(20951);
             mailboxMessage.Flags.Answered.ShouldBeFalse();
@@ -47,7 +48,8 @@ namespace LinqToImap.Tests.Imap.Parsing
         [Test, ExpectedException(typeof (ArgumentException))]
         public void Should_throw_exception_if_more_than_one_line_is_passed_as_input()
         {
-            parser.Parse(null, new[] {"1", "2"});
+            var lines = new[] { "1", "2", "li0001 OK" };
+            parser.Parse(null, new Response(lines));
         }
     }
 }

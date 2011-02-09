@@ -20,12 +20,12 @@ namespace LinqToImap.Imap
 
             sslStream = new SslStream(tcpClient.GetStream(), false);
             sslStream.AuthenticateAsClient(hostname);
-            streamReader = new StreamReader(sslStream, Encoding.ASCII);
+            streamReader = new StreamReader(sslStream);
 
             string response = Read();
-            if (!response.IsOk())
+            if (!response.StartsWith("* OK"))
             {
-                throw new ApplicationException(response);
+                throw new ImapException(response);
             }
         }
 
@@ -37,7 +37,7 @@ namespace LinqToImap.Imap
         public void Write(string message)
         {
             string tagNumber = (tag++).ToString("D4");
-            string taggedMessage = string.Format("kw{0} {1}{2}", tagNumber, message, Environment.NewLine);
+            string taggedMessage = string.Format("li{0} {1}{2}", tagNumber, message, Environment.NewLine);
             byte[] command = Encoding.ASCII.GetBytes(taggedMessage);
             sslStream.Write(command, 0, command.Length);
         }

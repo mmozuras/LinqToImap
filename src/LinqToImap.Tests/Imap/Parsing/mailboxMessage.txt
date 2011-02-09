@@ -1,1 +1,2 @@
 ﻿* 20951 FETCH (ENVELOPE ("Fri, 28 Jan 2011 10:00:24 GMT" "Subject" (("SERVER" NIL "John.Doe" "mail.com")) (("SERVER" NIL "John.Doe" "mail.com")) (("SERVER" NIL "John.Doe" "mail.com")) ((NIL NIL "John.Doe" "mail.com")) NIL NIL NIL "<26352748l.92612859l19179628l147l@mail.com>") FLAGS (\Seen) INTERNALDATE "28-Jan-2011 09:55:59 +0000" RFC822.SIZE 4645)
+li0001 OK

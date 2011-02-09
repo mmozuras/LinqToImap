@@ -18,7 +18,7 @@ namespace LinqToImap.Tests.Imap
             imapClient = A.Fake<IImapClient>();
 
             A.CallTo(() => imapClient.Read())
-                .Returns("kw0001 OK Success");
+                .Returns("li0001 OK");
 
             executor = new CommandExecutor(imapClient);
         }
@@ -26,25 +26,19 @@ namespace LinqToImap.Tests.Imap
         [Test]
         public void Should_execute_login()
         {
-            executor.Execute(new Login("username", "password")).ShouldNotBeEmpty();
+            executor.Execute(new Login("username", "password")).ShouldNotBeNull();
         }
 
         [Test]
         public void Should_execute_logout()
         {
-            executor.Execute(new Logout()).ShouldNotBeEmpty();
+            executor.Execute(new Logout()).ShouldNotBeNull();
         }
 
         [Test]
         public void Should_execute_fetch_all()
         {
             executor.Execute(new Fetch()).ShouldBeEmpty();
-        }
-
-        [Test]
-        public void Should_execute_search()
-        {
-            executor.Execute(new Search()).ShouldBeEmpty();
         }
 
         [Test]

@@ -2,6 +2,7 @@
 {
     using System.IO;
     using System.Linq;
+    using LinqToImap.Imap;
     using LinqToImap.Imap.Parsing;
     using NUnit.Framework;
     using Should;
@@ -12,10 +13,10 @@
         [Test]
         public void Should_parse_one_normal_message()
         {
-            string message = File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt")[0];
+            var message = File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt");
 
             var parser = new MailboxMessagesParser();
-            var mailboxMessages = parser.Parse(null, new[] {message});
+            var mailboxMessages = parser.Parse(null, new Response(message));
 
             mailboxMessages.Count().ShouldEqual(1);
         }

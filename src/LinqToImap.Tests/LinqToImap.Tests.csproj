@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="Imap\CommandExecutorTests.cs" />
     <Compile Include="Imap\Parsing\IdsParserTests.cs" />
+    <Compile Include="Imap\ResponseTests.cs" />
     <Compile Include="Linq\CommandExtensions.cs" />
     <Compile Include="Utils\EnsureTests.cs" />
     <Compile Include="Imap\Commands\CommandTests.cs" />

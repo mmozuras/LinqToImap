@@ -26,6 +26,19 @@ namespace LinqToImap.Tests.Utils
             new IntRange(1, 5).ShouldNotEqual(new IntRange(1, 3));
         }
 
+        [Test]
+        public void Should_not_equal_null()
+        {
+            new IntRange(1, 5).ShouldNotEqual(null);
+        }
+
+        [Test]
+        public void Should_equal_itself()
+        {
+            var range = new IntRange(1, 2);
+            range.ShouldEqual(range);
+        }
+
         [Test, ExpectedException(typeof(ArgumentException))]
         public void Should_not_let_create_an_int_range_where_from_is_greater_than_to()
         {

@@ -1,11 +1,11 @@
-namespace LinqToImap.Imap
+namespace LinqToImap.Imap.Parsing
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
 
-    public static class StringExtensions
+    public static class RegexExtensions
     {
         internal static IEnumerable<string> RegexMatches(this string input, string pattern)
         {
@@ -20,16 +20,6 @@ namespace LinqToImap.Imap
             {
                 ifSuccess(match.Groups[1].ToString().Trim());
             }
-        }
-
-        internal static bool IsOk(this string response)
-        {
-            return response.StartsWith("* OK") || (response.Length > 7 && response.Substring(7, 2) == "OK");
-        }
-
-        internal static bool HasInfo(this string response)
-        {
-            return response.StartsWith("*");
         }
     }
 }

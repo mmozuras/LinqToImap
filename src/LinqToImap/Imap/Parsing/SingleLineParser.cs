@@ -1,23 +1,19 @@
 ﻿namespace LinqToImap.Imap.Parsing
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using Commands;
 
     public abstract class SingleLineParser<T> : IParser<T>
     {
-        public T Parse(Command command, IEnumerable<string> input)
+        public T Parse(Command command, Response response)
         {
-            if (input.Count() == 1)
+            var line = response.Data.SingleOrDefault();
+            if (line != null)
             {
-                return Parse(input.Single());
+                return Parse(line);
             }
-            if (input.Count() == 2 && input.Last().IsOk())
-            {
-                return Parse(input.First());
-            }
-            throw new ArgumentException(GetType().Name + " can only parse a single line.", "input");
+            throw new ArgumentException(GetType().Name + " can only parse a single line.", "response");
         }
 
         public abstract T Parse(string input);
