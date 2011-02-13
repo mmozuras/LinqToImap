@@ -8,17 +8,17 @@
     using Should;
 
     [TestFixture]
-    public class MailboxMessagesParserTests
+    public class ImapMessagesParserTests
     {
         [Test]
         public void Should_parse_one_normal_message()
         {
-            var message = File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt");
+            var message = File.ReadAllLines(".\\Imap\\Parsing\\imapMessage.txt");
 
-            var parser = new MailboxMessagesParser();
-            var mailboxMessages = parser.Parse(null, new Response(message));
+            var parser = new ImapMessagesParser();
+            var messages = parser.Parse(null, new Response(message));
 
-            mailboxMessages.Count().ShouldEqual(1);
+            messages.Count().ShouldEqual(1);
         }
     }
 }

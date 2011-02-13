@@ -13,7 +13,7 @@ namespace LinqToImap.Imap
         {
             Name = name;
             Flags = new MessageFlags();
-            Messages = new ImapQueryable<MailboxMessage>(name, commandExecutor);
+            Messages = new ImapQueryable<ImapMessage>(name, commandExecutor);
         }
 
         public string Name { get; private set; }
@@ -23,11 +23,11 @@ namespace LinqToImap.Imap
 
         public MessageFlags Flags { get; internal set; }
 
-        public IQueryable<MailboxMessage> Messages { get; private set; }
+        public IQueryable<ImapMessage> Messages { get; private set; }
 
         public bool ReadableAndWritable { get; internal set; }
 
-        public IEnumerator<MailboxMessage> GetEnumerator()
+        public IEnumerator<ImapMessage> GetEnumerator()
         {
             return Messages.GetEnumerator();
         }

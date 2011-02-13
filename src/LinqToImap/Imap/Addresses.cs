@@ -6,7 +6,7 @@ namespace LinqToImap.Imap
     public class Addresses
     {
         public Addresses(MailAddress from, MailAddress sender, MailAddress replyTo,
-                          IEnumerable<MailAddress> to, IEnumerable<MailAddress> cc, IEnumerable<MailAddress> bcc)
+                         IEnumerable<MailAddress> to, IEnumerable<MailAddress> cc, IEnumerable<MailAddress> bcc)
         {
             From = from;
             Sender = sender;

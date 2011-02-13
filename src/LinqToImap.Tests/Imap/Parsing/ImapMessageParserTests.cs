@@ -9,19 +9,19 @@ namespace LinqToImap.Tests.Imap.Parsing
     using Should;
 
     [TestFixture]
-    public class MailboxMessageParserTests
+    public class ImapMessageParserTests
     {
         [SetUp]
         public void SetUp()
         {
-            parser = new MailboxMessageParser();
+            parser = new ImapMessageParser();
         }
 
-        private MailboxMessageParser parser;
+        private ImapMessageParser parser;
 
         private static IEnumerable<string> GetMessage()
         {
-            return File.ReadAllLines(".\\Imap\\Parsing\\mailboxMessage.txt");
+            return File.ReadAllLines(".\\Imap\\Parsing\\imapMessage.txt");
         }
 
         [Test]
@@ -33,16 +33,16 @@ namespace LinqToImap.Tests.Imap.Parsing
         [Test]
         public void Should_parse_a_normal_message()
         {
-            MailboxMessage mailboxMessage = parser.Parse(null, new Response(GetMessage()));
+            ImapMessage imapMessage = parser.Parse(null, new Response(GetMessage()));
 
-            mailboxMessage.Id.ShouldEqual(20951);
-            mailboxMessage.Flags.Answered.ShouldBeFalse();
-            mailboxMessage.Flags.Seen.ShouldBeTrue();
-            mailboxMessage.Subject.ShouldEqual("Subject");
-            mailboxMessage.Addresses.From.Address.ShouldEqual("John.Doe@mail.com");
-            mailboxMessage.Received.ShouldEqual(DateTime.Parse("2011.01.28 11:55:59"));
-            mailboxMessage.Sent.ShouldEqual(DateTime.Parse("2011.01.28 10:00:24"));
-            mailboxMessage.TimeZone.ShouldEqual("+0000");
+            imapMessage.Id.ShouldEqual(20951);
+            imapMessage.Flags.Answered.ShouldBeFalse();
+            imapMessage.Flags.Seen.ShouldBeTrue();
+            imapMessage.Subject.ShouldEqual("Subject");
+            imapMessage.Addresses.From.Address.ShouldEqual("John.Doe@mail.com");
+            imapMessage.Received.ShouldEqual(DateTime.Parse("2011.01.28 11:55:59"));
+            imapMessage.Sent.ShouldEqual(DateTime.Parse("2011.01.28 10:00:24"));
+            imapMessage.TimeZone.ShouldEqual("+0000");
         }
 
         [Test, ExpectedException(typeof (ArgumentException))]

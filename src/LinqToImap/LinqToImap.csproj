@@ -61,8 +61,8 @@
     <Compile Include="Imap\Parsing\AddressesParser.cs" />
     <Compile Include="Imap\Parsing\IdsParser.cs" />
     <Compile Include="Imap\Parsing\IParser.cs" />
-    <Compile Include="Imap\Parsing\MailboxMessageParser.cs" />
-    <Compile Include="Imap\Parsing\MailboxMessagesParser.cs" />
+    <Compile Include="Imap\Parsing\ImapMessageParser.cs" />
+    <Compile Include="Imap\Parsing\ImapMessagesParser.cs" />
     <Compile Include="Imap\Parsing\MailboxParser.cs" />
     <Compile Include="Imap\Parsing\MessageFlagsParser.cs" />
     <Compile Include="Imap\Parsing\SingleLineParser.cs" />
@@ -77,7 +77,7 @@
     <Compile Include="Imap\Parsing\QuotedPrintableDecoder.cs" />
     <Compile Include="Imap\ImapSslClient.cs" />
     <Compile Include="Imap\Mailbox.cs" />
-    <Compile Include="Imap\MailboxMessage.cs" />
+    <Compile Include="Imap\ImapMessage.cs" />
     <Compile Include="Imap\MessageFlags.cs" />
     <Compile Include="Imap\Parsing\RegexExtensions.cs" />
     <Compile Include="Linq\ImapQueryModelVisitor.cs" />

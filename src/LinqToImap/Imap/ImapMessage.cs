@@ -1,10 +1,11 @@
 namespace LinqToImap.Imap
 {
     using System;
+    using System.Net.Mail;
 
-    public class MailboxMessage
+    public class ImapMessage
     {
-        internal MailboxMessage()
+        internal ImapMessage()
         {
         }
 
@@ -20,5 +21,10 @@ namespace LinqToImap.Imap
         public string TimeZone { get; set; }
 
         public int Size { get; internal set; }
+
+        public MailMessage ToMailMessage()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

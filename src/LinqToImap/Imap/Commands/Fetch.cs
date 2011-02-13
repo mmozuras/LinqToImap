@@ -4,7 +4,7 @@ namespace LinqToImap.Imap.Commands
     using System.Linq;
     using Utils;
 
-    public sealed class Fetch : Command<IEnumerable<MailboxMessage>>
+    public sealed class Fetch : Command<IEnumerable<ImapMessage>>
     {
         public Fetch()
         {

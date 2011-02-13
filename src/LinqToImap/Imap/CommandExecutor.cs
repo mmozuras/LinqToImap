@@ -37,10 +37,10 @@
             var responses = Execute(command);
 
             Type parserType;
-            //NOTE: Workaround - needed, cause IMailbox is also IEnumerable<MailboxMessage>, so it finds two parsers.
-            if (typeof(T) == typeof(IEnumerable<MailboxMessage>))
+            //NOTE: Workaround - needed, cause IMailbox is also IEnumerable<ImapMessage>, so it finds two parsers.
+            if (typeof(T) == typeof(IEnumerable<ImapMessage>))
             {
-                parserType = typeof(MailboxMessagesParser);
+                parserType = typeof(ImapMessagesParser);
             }
             else
             {
