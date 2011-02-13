@@ -11,6 +11,6 @@ namespace LinqToImap.Imap.Commands
             Text = string.Format("SELECT {0}", mailboxName);
         }
 
-        public override string Text { get; protected set; }
+        protected override string Text { get; set; }
     }
 }

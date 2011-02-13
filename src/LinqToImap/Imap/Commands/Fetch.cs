@@ -6,11 +6,6 @@ namespace LinqToImap.Imap.Commands
 
     public sealed class Fetch : Command<IEnumerable<ImapMessage>>
     {
-        public Fetch()
-        {
-            Text = "FETCH 1:* ALL";
-        }
-
         public Fetch(IntRange range)
         {
             Ensure.IsNotNull(range, "range");
@@ -26,15 +21,19 @@ namespace LinqToImap.Imap.Commands
             }
             else
             {
-                Text = "FETCH 4294967295 ALL";
+                Text = string.Empty;
             }
         }
 
-        public Fetch(int id) : this(new[]{id})
+        public Fetch(int id) : this(new[] {id})
         {
-            
         }
 
-        public override string Text { get; protected set; }
+        protected override string Text { get; set; }
+
+        public bool IsEmpty
+        {
+            get { return string.IsNullOrWhiteSpace(Text); }
+        }
     }
 }

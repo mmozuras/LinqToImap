@@ -36,9 +36,9 @@ namespace LinqToImap.Tests.Imap
         }
 
         [Test]
-        public void Should_execute_fetch_all()
+        public void Should_execute_fetch()
         {
-            executor.Execute(new Fetch()).ShouldBeEmpty();
+            executor.Execute(new Fetch(1)).ShouldBeEmpty();
         }
 
         [Test]

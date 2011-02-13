@@ -12,6 +12,6 @@ namespace LinqToImap.Imap.Commands
             Text = string.Format("LOGIN {0} {1}", username, password);
         }
 
-        public override string Text { get; protected set; }
+        protected override string Text { get; set; }
     }
 }

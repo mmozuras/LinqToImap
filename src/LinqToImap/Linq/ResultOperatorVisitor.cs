@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using Imap;
     using Remotion.Data.Linq.Clauses;
     using Remotion.Data.Linq.Clauses.ResultOperators;
     using Utils;

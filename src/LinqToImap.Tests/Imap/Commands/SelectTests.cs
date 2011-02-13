@@ -11,7 +11,7 @@ namespace LinqToImap.Tests.Imap.Commands
         [Test]
         public void Should_create_a_valid_command()
         {
-            new Select("inbox").Text.ShouldEqual("SELECT inbox");
+            new Select("inbox").ToString().ShouldEqual("SELECT inbox");
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]

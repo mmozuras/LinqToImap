@@ -11,7 +11,7 @@ namespace LinqToImap.Tests.Imap.Commands
         [Test]
         public void Should_create_a_valid_command()
         {
-            new Login("username", "password").Text.ShouldEqual("LOGIN username password");
+            new Login("username", "password").ToString().ShouldEqual("LOGIN username password");
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]

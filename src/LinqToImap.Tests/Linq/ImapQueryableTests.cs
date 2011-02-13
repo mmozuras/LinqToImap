@@ -39,6 +39,18 @@ namespace LinqToImap.Tests.Linq
         private ICommandExecutor executor;
 
         [Test]
+        public void Should_not_execute_fetch_if_theres_nothing_to_fetch()
+        {
+            ExecutionOf(new Search("Subject nothing")).Returns(new int[] {});
+
+            queryable.Where(x => x.Subject.Contains("nothing")).ToList();
+
+            ExecutionOf(new Fetch(1))
+                .WithAnyArguments()
+                .MustNotHaveHappened();
+        }
+
+        [Test]
         public void Should_support_and()
         {
             ExecutionOf(new Search(1.To(5), "Answered Subject an")).Returns(new[] {1, 2});

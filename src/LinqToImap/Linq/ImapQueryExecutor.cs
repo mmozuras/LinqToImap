@@ -1,6 +1,5 @@
 ﻿namespace LinqToImap.Linq
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Imap;
@@ -52,9 +51,14 @@
 
             if (queryState.Ids != null)
             {
-                //TODO: Temporary cast, will probably be removed when I'll figure out re-linq.
-                var fetchAll = new Fetch(queryState.Ids);
-                return (IEnumerable<T>) commandExecutor.Execute(fetchAll);
+                if (queryState.Ids.Any())
+                {
+                    //TODO: Temporary cast, will probably be removed when I'll figure out re-linq.
+                    var fetchAll = new Fetch(queryState.Ids);
+                    return (IEnumerable<T>)commandExecutor.Execute(fetchAll);   
+                }
+                return new T[] {};
+
             }
             if (queryState.Range != null)
             {

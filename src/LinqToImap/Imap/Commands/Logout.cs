@@ -7,6 +7,6 @@
             Text = "LOGOUT";
         }
 
-        public override string Text { get; protected set; }
+        protected override string Text { get; set; }
     }
 }

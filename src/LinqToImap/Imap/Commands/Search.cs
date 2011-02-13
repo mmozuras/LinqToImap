@@ -6,7 +6,7 @@ namespace LinqToImap.Imap.Commands
     public sealed class Search : Command<IEnumerable<int>>
     {
         //TODO: Validate query
-        //Supported keywords: 
+        // Example:
         // var supportedKeywords = new[] {"Seen", "Deleted", "Draft", "Answered", "Flagged", "Recent", "Subject"};
 
         public Search() : this("ALL")
@@ -30,6 +30,6 @@ namespace LinqToImap.Imap.Commands
             Text = string.Format("SEARCH {0} {1}", string.Join(",", ids), query);
         }
 
-        public override string Text { get; protected set; }
+        protected override string Text { get; set; }
     }
 }

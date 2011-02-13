@@ -8,7 +8,7 @@
     {
         public IMailbox Parse(Command command, Response response)
         {
-            var name = command.Text.Split().Last();
+            var name = command.ToString().Split().Last();
 
             var imapMailbox = new Mailbox(name, CommandExecutor.Current);
             var messageFlagsParser = new MessageFlagsParser();

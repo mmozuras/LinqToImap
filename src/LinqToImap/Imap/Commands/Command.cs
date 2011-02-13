@@ -8,7 +8,7 @@
 
     public abstract class Command : IEquatable<Command>
     {
-        public abstract string Text { get; protected set; }
+        protected abstract string Text { get; set; }
 
         public bool Equals(Command other)
         {

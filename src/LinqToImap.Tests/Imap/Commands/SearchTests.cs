@@ -14,25 +14,25 @@ namespace LinqToImap.Tests.Imap.Commands
         public void Should_create_a_valid_command()
         {
             var search = new Search("SUBJECT s");
-            search.Text.ShouldEqual("SEARCH SUBJECT s");
+            search.ToString().ShouldEqual("SEARCH SUBJECT s");
         }
 
         [Test]
         public void Should_create_a_valid_command_from_zero_query_arguments()
         {
-            new Search().Text.ShouldEqual("SEARCH ALL");
+            new Search().ToString().ShouldEqual("SEARCH ALL");
         }
 
         [Test]
         public void Should_create_a_valid_command_from_range_of_ids()
         {
-            new Search(1.To(10), "SUBJECT s").Text.ShouldEqual("SEARCH 1:10 SUBJECT s");
+            new Search(1.To(10), "SUBJECT s").ToString().ShouldEqual("SEARCH 1:10 SUBJECT s");
         }
 
         [Test]
         public void Should_create_a_valid_command_from_collection_of_ids()
         {
-            new Search(new[] { 1, 2, 3 }, "SUBJECT s").Text.ShouldEqual("SEARCH 1,2,3 SUBJECT s");
+            new Search(new[] { 1, 2, 3 }, "SUBJECT s").ToString().ShouldEqual("SEARCH 1,2,3 SUBJECT s");
         }
 
         [Test, ExpectedException(typeof(ArgumentNullException))]

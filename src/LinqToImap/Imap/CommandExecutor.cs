@@ -23,7 +23,7 @@
 
         public Response Execute(Command command)
         {
-            imapClient.Write(command.Text);
+            imapClient.Write(command.ToString());
             return Response.ReadFrom(imapClient);
         }
 
