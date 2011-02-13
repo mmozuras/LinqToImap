@@ -1,7 +1,6 @@
 ﻿namespace LinqToImap.Imap
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using Commands;
@@ -36,18 +35,9 @@
         {
             var responses = Execute(command);
 
-            Type parserType;
-            //NOTE: Workaround - needed, cause IMailbox is also IEnumerable<ImapMessage>, so it finds two parsers.
-            if (typeof(T) == typeof(IEnumerable<ImapMessage>))
-            {
-                parserType = typeof(ImapMessagesParser);
-            }
-            else
-            {
-                parserType = Assembly.GetExecutingAssembly()
-                    .GetTypes()
-                    .Where(typeof(IParser<T>).IsAssignableFrom).Single();
-            }
+            Type parserType = Assembly.GetExecutingAssembly()
+                .GetExportedTypes()
+                .Where(x => x.GetInterfaces().Contains(typeof (IParser<T>))).Single();
 
             var parser = (IParser<T>)Activator.CreateInstance(parserType);
             return parser.Parse(command, responses);
