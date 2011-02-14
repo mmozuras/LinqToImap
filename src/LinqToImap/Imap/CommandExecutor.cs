@@ -17,7 +17,7 @@
             Current = this;
         }
 
-        //TODO: This could be done better (CommandExecutor.Current)
+        //TODO: Static field CommandExecutor.Current should be removed.
         public static ICommandExecutor Current { get; private set; }
 
         public Response Execute(Command command)

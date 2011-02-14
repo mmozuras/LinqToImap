@@ -48,6 +48,7 @@
     </Compile>
     <Compile Include="Imap\CommandExecutor.cs" />
     <Compile Include="Imap\Commands\Command.cs" />
+    <Compile Include="Imap\Commands\FetchItem.cs" />
     <Compile Include="Imap\IMailbox.cs" />
     <Compile Include="Imap\ImapException.cs" />
     <Compile Include="Imap\Response.cs" />

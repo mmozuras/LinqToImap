@@ -22,7 +22,8 @@
                               queryState =>
                                   {
                                       var select = new Select(mailboxName);
-                                      queryState.Range = 1.To(commandExecutor.Execute(select).MessagesCount);
+                                      var messagesCount = commandExecutor.Execute(select).MessagesCount;
+                                      queryState.Range = 1.To(messagesCount);
                                   }
                           };
         }

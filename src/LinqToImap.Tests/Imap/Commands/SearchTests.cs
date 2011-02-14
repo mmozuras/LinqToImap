@@ -18,12 +18,6 @@ namespace LinqToImap.Tests.Imap.Commands
         }
 
         [Test]
-        public void Should_create_a_valid_command_from_zero_query_arguments()
-        {
-            new Search().ToString().ShouldEqual("SEARCH ALL");
-        }
-
-        [Test]
         public void Should_create_a_valid_command_from_range_of_ids()
         {
             new Search(1.To(10), "SUBJECT s").ToString().ShouldEqual("SEARCH 1:10 SUBJECT s");
