@@ -13,10 +13,10 @@
         [Test]
         public void Should_parse_one_normal_message()
         {
-            var message = File.ReadAllLines(".\\Imap\\Parsing\\imapMessage.txt");
+            var message = File.ReadAllText(".\\Imap\\Parsing\\imapMessage.txt");
 
             var parser = new ImapMessagesParser();
-            var messages = parser.Parse(null, new Response(message));
+            var messages = parser.Parse(null, new Response(new[] {message, "li0001 OK"}));
 
             messages.Count().ShouldEqual(1);
         }

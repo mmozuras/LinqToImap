@@ -26,11 +26,14 @@
                 input = input.Remove(0, match.Index + match.Length);
             }
 
-            string subject = input.Substring(0, input.IndexOf("(("));
-            subject.Trim().RegexMatch("^\"(.*)\"$", m => { imapMessage.Subject = QuotedPrintableDecoder.Decode(m); });
+            if (input.Contains("(("))
+            {
+                string subject = input.Substring(0, input.IndexOf("(("));
+                subject.Trim().RegexMatch("^\"(.*)\"$", m => { imapMessage.Subject = QuotedPrintableDecoder.Decode(m); });
 
-            var addressesParser = new AddressesParser();
-            imapMessage.Addresses = addressesParser.Parse(input);
+                var addressesParser = new AddressesParser();
+                imapMessage.Addresses = addressesParser.Parse(input);    
+            }
 
             return imapMessage;
         }
