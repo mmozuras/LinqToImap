@@ -4,6 +4,7 @@
 
 LinqToImap is not finished, but you can already write queries like this: 
 
-`(from message in gmail.Inbox  
-  where message.Subject.Contains("subject") && message.Flags.Seen  
-  select message).Take(20)  `
+`(from message in gmail.Inbox`  
+`where message.Subject.Contains("subject") && message.Flags.Seen`  
+`select message).Take(20)`  
+
